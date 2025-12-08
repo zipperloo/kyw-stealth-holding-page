@@ -115,9 +115,11 @@
       box-shadow: inset 0 0 20px rgba(130, 100, 255, 0.15), 0 0 10px rgba(130, 100, 255, 0.08);
       filter: blur(1.5px);
       transition: all 0.5s ease;
+      will-change: transform;
+      transform: translateZ(0);
     }
 
-    /* Each trace has unique wobble animation - smooth glow */
+    /* Reduced traces for better mobile performance - keep 7 instead of 15 */
     .ai-ring-trace-1 {
       animation: blob-trace-1 18s ease-in-out infinite;
       width: 480px; height: 480px;
@@ -125,73 +127,44 @@
     }
     .ai-ring-trace-2 {
       animation: blob-trace-1 18s ease-in-out infinite 0.4s;
-      width: 495px; height: 495px;
-      box-shadow: inset 0 0 15px rgba(130, 100, 255, 0.16), 0 0 8px rgba(130, 100, 255, 0.09);
-    }
-    .ai-ring-trace-3 {
-      animation: blob-trace-1 18s ease-in-out infinite 0.8s;
       width: 510px; height: 510px;
       box-shadow: inset 0 0 15px rgba(130, 100, 255, 0.15), 0 0 8px rgba(130, 100, 255, 0.09);
     }
-    .ai-ring-trace-4 {
-      animation: blob-trace-1 18s ease-in-out infinite 1.2s;
-      width: 525px; height: 525px;
-      box-shadow: inset 0 0 15px rgba(130, 100, 255, 0.13), 0 0 8px rgba(130, 100, 255, 0.08);
-    }
-    .ai-ring-trace-5 {
-      animation: blob-trace-1 18s ease-in-out infinite 1.6s;
+    .ai-ring-trace-3 {
+      animation: blob-trace-1 18s ease-in-out infinite 0.8s;
       width: 540px; height: 540px;
       box-shadow: inset 0 0 15px rgba(130, 100, 255, 0.12), 0 0 8px rgba(130, 100, 255, 0.08);
     }
-    .ai-ring-trace-6 {
-      animation: blob-trace-1 18s ease-in-out infinite 2s;
-      width: 555px; height: 555px;
-      box-shadow: inset 0 0 15px rgba(130, 100, 255, 0.1), 0 0 8px rgba(130, 100, 255, 0.07);
-    }
-    .ai-ring-trace-7 {
-      animation: blob-trace-1 18s ease-in-out infinite 2.4s;
+    .ai-ring-trace-4 {
+      animation: blob-trace-1 18s ease-in-out infinite 1.2s;
       width: 570px; height: 570px;
       box-shadow: inset 0 0 15px rgba(130, 100, 255, 0.08), 0 0 8px rgba(130, 100, 255, 0.06);
     }
-    .ai-ring-trace-8 {
-      animation: blob-trace-1 18s ease-in-out infinite 2.8s;
-      width: 585px; height: 585px;
-      box-shadow: inset 0 0 15px rgba(130, 100, 255, 0.07), 0 0 8px rgba(130, 100, 255, 0.05);
-    }
-    .ai-ring-trace-9 {
-      animation: blob-trace-1 18s ease-in-out infinite 3.2s;
+    .ai-ring-trace-5 {
+      animation: blob-trace-1 18s ease-in-out infinite 1.6s;
       width: 600px; height: 600px;
       box-shadow: inset 0 0 15px rgba(130, 100, 255, 0.06), 0 0 8px rgba(130, 100, 255, 0.04);
     }
-    .ai-ring-trace-10 {
-      animation: blob-trace-1 18s ease-in-out infinite 3.6s;
-      width: 615px; height: 615px;
-      box-shadow: inset 0 0 15px rgba(130, 100, 255, 0.04), 0 0 8px rgba(130, 100, 255, 0.03);
-    }
-    .ai-ring-trace-11 {
-      animation: blob-trace-1 18s ease-in-out infinite 4s;
+    .ai-ring-trace-6 {
+      animation: blob-trace-1 18s ease-in-out infinite 2s;
       width: 630px; height: 630px;
-      box-shadow: inset 0 0 15px rgba(130, 100, 255, 0.06), 0 0 8px rgba(130, 100, 255, 0.04);
-    }
-    .ai-ring-trace-12 {
-      animation: blob-trace-1 18s ease-in-out infinite 4.4s;
-      width: 645px; height: 645px;
       box-shadow: inset 0 0 15px rgba(130, 100, 255, 0.04), 0 0 8px rgba(130, 100, 255, 0.03);
     }
-    .ai-ring-trace-13 {
-      animation: blob-trace-1 18s ease-in-out infinite 4.8s;
+    .ai-ring-trace-7 {
+      animation: blob-trace-1 18s ease-in-out infinite 2.4s;
       width: 660px; height: 660px;
-      box-shadow: inset 0 0 15px rgba(130, 100, 255, 0.03), 0 0 8px rgba(130, 100, 255, 0.02);
-    }
-    .ai-ring-trace-14 {
-      animation: blob-trace-1 18s ease-in-out infinite 5.2s;
-      width: 675px; height: 675px;
       box-shadow: inset 0 0 15px rgba(130, 100, 255, 0.02), 0 0 8px rgba(130, 100, 255, 0.01);
     }
+    /* Hide traces 8-15 for mobile optimization */
+    .ai-ring-trace-8,
+    .ai-ring-trace-9,
+    .ai-ring-trace-10,
+    .ai-ring-trace-11,
+    .ai-ring-trace-12,
+    .ai-ring-trace-13,
+    .ai-ring-trace-14,
     .ai-ring-trace-15 {
-      animation: blob-trace-1 18s ease-in-out infinite 5.6s;
-      width: 690px; height: 690px;
-      box-shadow: inset 0 0 15px rgba(130, 100, 255, 0.01), 0 0 8px rgba(130, 100, 255, 0.005);
+      display: none;
     }
 
     /* Outer glow aura - ring-shaped, no center fill */
@@ -1017,6 +990,46 @@
       
       #breaking-news-text {
         max-width: 140px;
+      }
+    }
+
+    /* MOBILE PERFORMANCE OPTIMIZATION - Reduce animations & blur */
+    @media (max-width: 768px) and (hover: none) {
+      /* Reduce animation complexity on touch devices */
+      .ai-ring-trace {
+        filter: blur(0.8px) !important;
+        animation-duration: 24s !important;
+      }
+
+      .ai-ring-aura {
+        filter: blur(20px) !important;
+        animation-duration: 6s !important;
+      }
+
+      .orb {
+        filter: blur(60px) !important;
+        animation-duration: 30s !important;
+      }
+
+      /* Simplify data card animations */
+      .data-card {
+        animation-duration: 2s !important;
+      }
+
+      /* Reduce floating doc animation complexity */
+      .floating-doc {
+        animation-duration: 5s !important;
+      }
+
+      /* Disable 3D transforms on mobile for better performance */
+      .title, .ai-ring-container {
+        perspective: none !important;
+      }
+
+      /* Reduce background grid complexity */
+      .background-grid {
+        background-size: 40px 40px !important;
+        opacity: 0.8 !important;
       }
     }
   </style>
