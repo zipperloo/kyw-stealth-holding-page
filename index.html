@@ -1232,6 +1232,7 @@
     }
   </style>
 
+
   <!-- Dynamic Flowing Data Cards (6 cards max) -->
   <div class="data-flow">
     <div class="data-card" id="card-1">
@@ -1727,11 +1728,23 @@
     }
 
     function updateTitle() {
-      const shouldShowFull = currentIndex % 2 === 0;
-      const newTitle = shouldShowFull ? 'KNOW YOUR WORTH' : 'ERP FOR WEALTH';
-      const newTagline = shouldShowFull 
-        ? 'MULTI-ENTITY • MULTI-CURRENCY • EVERY ASSET CLASS • NATIVE AI' 
-        : 'FAMILY OFFICE FUNCTIONALITY • PRICED FOR RETAIL INVESTORS';
+      const titleCycle = currentIndex % 3;
+      let newTitle, newTagline;
+      
+      switch(titleCycle) {
+        case 0:
+          newTitle = 'KNOW YOUR WORTH';
+          newTagline = 'MULTI-ENTITY • MULTI-CURRENCY • EVERY ASSET CLASS • NATIVE AI';
+          break;
+        case 1:
+          newTitle = 'ERP FOR WEALTH';
+          newTagline = 'FAMILY OFFICE FUNCTIONALITY • PRICED FOR RETAIL INVESTORS';
+          break;
+        case 2:
+          newTitle = 'KYW';
+          newTagline = 'DID YOU EVER CALCULATE THE IMPACT OF FEES OVER 20 YEARS?';
+          break;
+      }
       
       const taglineEl = document.getElementById('dynamic-tagline');
       
@@ -1741,9 +1754,9 @@
         
         setTimeout(() => {
           titleEl.textContent = newTitle;
-          // Make "KNOW YOUR WORTH" bigger on mobile, "ERP FOR WEALTH" smaller
+          // Make "KNOW YOUR WORTH" and "KYW" bigger on mobile
           const isMobile = window.innerWidth <= 480;
-          if (shouldShowFull) {
+          if (titleCycle === 0 || titleCycle === 2) {
             titleEl.style.fontSize = isMobile ? '2rem' : '';
           } else {
             titleEl.style.fontSize = 'clamp(1.8rem, 5vw, 3.5rem)';
