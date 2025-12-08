@@ -310,7 +310,85 @@
       50% { opacity: 0.8; transform: scale(1.08); }
     }
 
+    /* MOBILE SMOOTH ANIMATIONS - Replace border-radius with smooth transforms */
+    @media (max-width: 768px) and (hover: none) {
+      @keyframes blob-trace-1 {
+        0%, 100% { 
+          transform: scale(1) rotateZ(0deg);
+          opacity: 0.6;
+        }
+        50% { 
+          transform: scale(1.08) rotateZ(2deg);
+          opacity: 0.75;
+        }
+      }
 
+      @keyframes blob-trace-2 {
+        0%, 100% { 
+          transform: scale(1.02) rotateZ(-1deg);
+          opacity: 0.55;
+        }
+        50% { 
+          transform: scale(0.98) rotateZ(1deg);
+          opacity: 0.7;
+        }
+      }
+
+      @keyframes blob-trace-3 {
+        0%, 100% { 
+          transform: scale(1) rotateZ(1deg);
+          opacity: 0.5;
+        }
+        50% { 
+          transform: scale(1.06) rotateZ(-2deg);
+          opacity: 0.65;
+        }
+      }
+
+      @keyframes blob-trace-4 {
+        0%, 100% { 
+          transform: scale(0.99) rotateZ(-1.5deg);
+          opacity: 0.45;
+        }
+        50% { 
+          transform: scale(1.04) rotateZ(1.5deg);
+          opacity: 0.6;
+        }
+      }
+
+      @keyframes blob-trace-5 {
+        0%, 100% { 
+          transform: scale(1.01) rotateZ(0.5deg);
+          opacity: 0.4;
+        }
+        50% { 
+          transform: scale(0.97) rotateZ(-0.5deg);
+          opacity: 0.55;
+        }
+      }
+
+      @keyframes blob-trace-6 {
+        0%, 100% { 
+          transform: scale(0.98) rotateZ(1deg);
+          opacity: 0.35;
+        }
+        50% { 
+          transform: scale(1.02) rotateZ(-1deg);
+          opacity: 0.5;
+        }
+      }
+
+      @keyframes blob-trace-7 {
+        0%, 100% { 
+          transform: scale(1) rotateZ(-0.5deg);
+          opacity: 0.3;
+        }
+        50% { 
+          transform: scale(1.03) rotateZ(0.5deg);
+          opacity: 0.45;
+        }
+      }
+    }
 
     .title-with-voice {
       position: relative;
@@ -995,10 +1073,10 @@
 
     /* MOBILE PERFORMANCE OPTIMIZATION - Reduce animations & blur */
     @media (max-width: 768px) and (hover: none) {
-      /* Reduce animation complexity on touch devices */
+      /* Use simpler transform-based animations (no border-radius changes) */
       .ai-ring-trace {
         filter: blur(0.8px) !important;
-        animation-duration: 24s !important;
+        border-radius: 50% !important;
       }
 
       .ai-ring-aura {
@@ -1021,7 +1099,7 @@
         animation-duration: 5s !important;
       }
 
-      /* Disable 3D transforms on mobile for better performance */
+      /* Disable heavy 3D transforms on mobile */
       .title, .ai-ring-container {
         perspective: none !important;
       }
