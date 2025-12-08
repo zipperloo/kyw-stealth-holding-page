@@ -1169,15 +1169,62 @@
     <div style="width: 8px; height: 8px; background: #604de4; border-radius: 50%; animation: pulse 2s infinite;"></div>
     <span>Building in stealth. Beta in Summer 2026.</span>
   </div>
+
+  <!-- Email Signup Form - Inline -->
+  <form action="https://formspree.io/f/xkgdvqev" method="POST" style="position: fixed; bottom: 120px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; gap: 8px; align-items: center;">
+    <input 
+      type="email" 
+      name="email" 
+      placeholder="your@email.com" 
+      required
+      style="background: rgba(76, 110, 245, 0.15); border: 1px solid rgba(76, 110, 245, 0.3); border-radius: 6px; padding: 10px 14px; color: #ffffff; font-family: Inter, sans-serif; font-size: 0.8rem; min-width: 160px; transition: all 0.3s ease;"
+    />
+    <button 
+      type="submit"
+      style="background: linear-gradient(135deg, #604de4 0%, #4c6ef5 100%); border: none; border-radius: 6px; padding: 10px 20px; color: #ffffff; font-weight: 600; font-size: 0.8rem; cursor: pointer; text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; transition: all 0.3s ease;"
+    >
+      Update Me
+    </button>
+  </form>
   <style>
     @keyframes pulse {
       0%, 100% { opacity: 1; box-shadow: 0 0 8px #604de4; }
       50% { opacity: 0.5; box-shadow: 0 0 16px #4c6ef5; }
     }
+    
+    input[type="email"]:focus {
+      outline: none;
+      border-color: rgba(76, 110, 245, 0.6) !important;
+      background: rgba(76, 110, 245, 0.25) !important;
+    }
+    
+    button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(96, 77, 228, 0.3);
+    }
+    
     @media (max-width: 480px) {
       #stealth-status {
         font-size: 0.65rem !important;
         bottom: 100px !important;
+      }
+      
+      form {
+        bottom: 150px !important;
+        left: 50% !important;
+        width: 90% !important;
+        max-width: 320px !important;
+      }
+      
+      input[type="email"] {
+        min-width: 120px !important;
+        font-size: 0.75rem !important;
+        padding: 8px 10px !important;
+      }
+      
+      button[type="submit"] {
+        font-size: 0.75rem !important;
+        padding: 8px 14px !important;
       }
     }
   </style>
