@@ -1691,8 +1691,13 @@
         
         setTimeout(() => {
           titleEl.textContent = newTitle;
-          // Make "ERP FOR WEALTH" smaller than the brand name
-          titleEl.style.fontSize = shouldShowFull ? '' : 'clamp(1.8rem, 5vw, 3.5rem)';
+          // Make "KNOW YOUR WORTH" bigger on mobile, "ERP FOR WEALTH" smaller
+          const isMobile = window.innerWidth <= 480;
+          if (shouldShowFull) {
+            titleEl.style.fontSize = isMobile ? '2rem' : '';
+          } else {
+            titleEl.style.fontSize = 'clamp(1.8rem, 5vw, 3.5rem)';
+          }
           titleEl.style.opacity = '1';
           if (taglineEl) {
             taglineEl.textContent = newTagline;
