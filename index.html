@@ -1623,13 +1623,43 @@
         
         // Get random position with collision detection
         const pos = getRandomPosition(size.width, size.height, displayedCards);
-        card.style.left = pos.left + 'px';
-        card.style.top = pos.top + 'px';
+        let { left, top } = pos;
+        
+        // Adjust position if it overlaps with brand name area (center)
+        const vh = window.innerHeight;
+        const vw = window.innerWidth;
+        const centerY = vh / 2;
+        const brandZoneTop = centerY - 80;
+        const brandZoneBottom = centerY + 80;
+        const cardBottom = top + size.height;
+        const cardTop = top;
+        
+        // If card overlaps with brand zone, push it away
+        if (cardTop < brandZoneBottom && cardBottom > brandZoneTop) {
+          // Card is in the brand zone - decide to push up or down
+          const distanceToTop = cardTop - brandZoneTop;
+          const distanceToBottom = brandZoneBottom - cardBottom;
+          
+          if (distanceToTop < distanceToBottom) {
+            // Closer to top - push up
+            top = brandZoneTop - size.height - 20;
+          } else {
+            // Closer to bottom - push down
+            top = brandZoneBottom + 20;
+          }
+          
+          // Ensure we stay in viewport
+          if (top < 0) top = brandZoneBottom + 20;
+          if (top + size.height > vh) top = brandZoneTop - size.height - 20;
+        }
+        
+        card.style.left = left + 'px';
+        card.style.top = top + 'px';
         
         // Store card position for collision detection
         displayedCards.set(card, {
-          left: pos.left,
-          top: pos.top,
+          left: left,
+          top: top,
           width: size.width,
           height: size.height
         });
@@ -2056,16 +2086,46 @@
       doc.innerHTML = createDocumentHTML(template);
       
       // Position with collision detection
-      const pos = getRandomDocPosition(doc);
-      doc.style.left = pos.left + 'px';
-      doc.style.top = pos.top + 'px';
+      let pos = getRandomDocPosition(doc);
+      let { left, top, width, height } = pos;
+      
+      // Adjust position if it overlaps with brand name area (center)
+      const vh = window.innerHeight;
+      const vw = window.innerWidth;
+      const centerY = vh / 2;
+      const brandZoneTop = centerY - 80;
+      const brandZoneBottom = centerY + 80;
+      const docBottom = top + height;
+      const docTop = top;
+      
+      // If doc overlaps with brand zone, push it away
+      if (docTop < brandZoneBottom && docBottom > brandZoneTop) {
+        // Doc is in the brand zone - decide to push up or down
+        const distanceToTop = docTop - brandZoneTop;
+        const distanceToBottom = brandZoneBottom - docBottom;
+        
+        if (distanceToTop < distanceToBottom) {
+          // Closer to top - push up
+          top = brandZoneTop - height - 15;
+        } else {
+          // Closer to bottom - push down
+          top = brandZoneBottom + 15;
+        }
+        
+        // Ensure we stay in viewport
+        if (top < 0) top = brandZoneBottom + 15;
+        if (top + height > vh) top = brandZoneTop - height - 15;
+      }
+      
+      doc.style.left = left + 'px';
+      doc.style.top = top + 'px';
       
       // Track this document's position
       displayedDocs.set(doc, {
-        left: pos.left,
-        top: pos.top,
-        width: pos.width,
-        height: pos.height
+        left: left,
+        top: top,
+        width: width,
+        height: height
       });
       
       // Trigger animation (alternate between two styles)
