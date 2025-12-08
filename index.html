@@ -78,7 +78,13 @@
       opacity: 0.25;
     }
 
-    /* CENTER STAGE */
+    /* MOBILE: Disable floating orb animations for performance */
+    @media (max-width: 768px) and (hover: none) {
+      .orb-1,
+      .orb-2 {
+        animation: none !important;
+      }
+    }    /* CENTER STAGE */
     .center-stage {
       position: fixed;
       inset: 0;
@@ -165,6 +171,20 @@
     .ai-ring-trace-14,
     .ai-ring-trace-15 {
       display: none;
+    }
+
+    /* MOBILE: Disable morphing animations, use static state */
+    @media (max-width: 768px) and (hover: none) {
+      .ai-ring-trace-1,
+      .ai-ring-trace-2,
+      .ai-ring-trace-3,
+      .ai-ring-trace-4,
+      .ai-ring-trace-5,
+      .ai-ring-trace-6,
+      .ai-ring-trace-7 {
+        animation: none !important;
+        border-radius: 50% !important;
+      }
     }
 
     /* Outer glow aura - ring-shaped, no center fill */
@@ -478,6 +498,19 @@
       transform: translateZ(20px);
     }
 
+    /* MOBILE: Disable 3D card animations */
+    @media (max-width: 768px) and (hover: none) {
+      .data-card {
+        animation: none !important;
+        transform: none !important;
+        opacity: 0.7 !important;
+      }
+
+      .data-card:hover {
+        transform: none !important;
+      }
+    }
+
     /* CARD ANIMATIONS - 3D SKEWED ENTRANCE/EXIT */
     @keyframes card-enter-left {
       0% {
@@ -664,6 +697,21 @@
 
     .floating-doc.falling {
       animation: fall-off 1.2s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards !important;
+    }
+
+    /* MOBILE: Disable floating document animations */
+    @media (max-width: 768px) and (hover: none) {
+      .floating-doc {
+        animation: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+
+      .floating-doc.active,
+      .floating-doc.active-alt {
+        animation: none !important;
+        opacity: 0 !important;
+      }
     }
 
     /* FLOATING DOCUMENTS */
@@ -1068,46 +1116,6 @@
       
       #breaking-news-text {
         max-width: 140px;
-      }
-    }
-
-    /* MOBILE PERFORMANCE OPTIMIZATION - Reduce animations & blur */
-    @media (max-width: 768px) and (hover: none) {
-      /* Use simpler transform-based animations (no border-radius changes) */
-      .ai-ring-trace {
-        filter: blur(0.8px) !important;
-        border-radius: 50% !important;
-      }
-
-      .ai-ring-aura {
-        filter: blur(20px) !important;
-        animation-duration: 6s !important;
-      }
-
-      .orb {
-        filter: blur(60px) !important;
-        animation-duration: 30s !important;
-      }
-
-      /* Simplify data card animations */
-      .data-card {
-        animation-duration: 2s !important;
-      }
-
-      /* Reduce floating doc animation complexity */
-      .floating-doc {
-        animation-duration: 5s !important;
-      }
-
-      /* Disable heavy 3D transforms on mobile */
-      .title, .ai-ring-container {
-        perspective: none !important;
-      }
-
-      /* Reduce background grid complexity */
-      .background-grid {
-        background-size: 40px 40px !important;
-        opacity: 0.8 !important;
       }
     }
   </style>
