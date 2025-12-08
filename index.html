@@ -1629,8 +1629,9 @@
         const vh = window.innerHeight;
         const vw = window.innerWidth;
         const centerY = vh / 2;
-        const brandZoneTop = centerY - 80;
-        const brandZoneBottom = centerY + 80;
+        // Larger brand zone to protect the title
+        const brandZoneTop = centerY - 120;
+        const brandZoneBottom = centerY + 120;
         const cardBottom = top + size.height;
         const cardTop = top;
         
@@ -1642,15 +1643,15 @@
           
           if (distanceToTop < distanceToBottom) {
             // Closer to top - push up
-            top = brandZoneTop - size.height - 20;
+            top = brandZoneTop - size.height - 30;
           } else {
             // Closer to bottom - push down
-            top = brandZoneBottom + 20;
+            top = brandZoneBottom + 30;
           }
           
           // Ensure we stay in viewport
-          if (top < 0) top = brandZoneBottom + 20;
-          if (top + size.height > vh) top = brandZoneTop - size.height - 20;
+          if (top < 0) top = brandZoneBottom + 30;
+          if (top + size.height > vh) top = brandZoneTop - size.height - 30;
         }
         
         card.style.left = left + 'px';
@@ -2093,8 +2094,9 @@
       const vh = window.innerHeight;
       const vw = window.innerWidth;
       const centerY = vh / 2;
-      const brandZoneTop = centerY - 80;
-      const brandZoneBottom = centerY + 80;
+      // Larger brand zone to protect the title
+      const brandZoneTop = centerY - 120;
+      const brandZoneBottom = centerY + 120;
       const docBottom = top + height;
       const docTop = top;
       
@@ -2106,15 +2108,15 @@
         
         if (distanceToTop < distanceToBottom) {
           // Closer to top - push up
-          top = brandZoneTop - height - 15;
+          top = brandZoneTop - height - 25;
         } else {
           // Closer to bottom - push down
-          top = brandZoneBottom + 15;
+          top = brandZoneBottom + 25;
         }
         
         // Ensure we stay in viewport
-        if (top < 0) top = brandZoneBottom + 15;
-        if (top + height > vh) top = brandZoneTop - height - 15;
+        if (top < 0) top = brandZoneBottom + 25;
+        if (top + height > vh) top = brandZoneTop - height - 25;
       }
       
       doc.style.left = left + 'px';
