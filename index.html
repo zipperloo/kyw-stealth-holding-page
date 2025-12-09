@@ -1584,7 +1584,18 @@
 
     // Collision detection - avoid cards and center branding
     function checkCollision(left, top, width, height, existingCards) {
-      const padding = 20;
+      const vw = window.innerWidth;
+      
+      // Adaptive padding based on viewport size
+      let padding;
+      if (vw <= 480) {
+        padding = 12; // Tighter on mobile
+      } else if (vw <= 768) {
+        padding = 16; // Medium on tablet
+      } else {
+        padding = 20; // Standard on desktop
+      }
+      
       const rect1 = {
         left: left - padding,
         right: left + width + padding,
@@ -1607,11 +1618,19 @@
       }
 
       // Check collision with center branding area (KYW / KNOW YOUR WORTH)
-      const vw = window.innerWidth;
       const vh = window.innerHeight;
       const centerX = vw / 2;
       const centerY = vh / 2;
-      const brandZoneRadius = 280; // Radius around center to protect
+      
+      // Adaptive brand zone radius based on viewport
+      let brandZoneRadius;
+      if (vw <= 480) {
+        brandZoneRadius = 220; // Smaller on mobile to give more card space
+      } else if (vw <= 768) {
+        brandZoneRadius = 250;
+      } else {
+        brandZoneRadius = 280; // Full radius on desktop
+      }
 
       // Calculate distance from card center to brand center
       const cardCenterX = left + width / 2;
@@ -1633,16 +1652,71 @@
       const vh = window.innerHeight;
       let position;
       let attempts = 0;
-      const maxAttempts = 50;
+      
+      // Increase attempts on smaller screens where space is tighter
+      let maxAttempts;
+      if (vw <= 480) {
+        maxAttempts = 100; // More attempts on mobile due to tight space
+      } else if (vw <= 768) {
+        maxAttempts = 80;
+      } else {
+        maxAttempts = 60; // Standard on desktop
+      }
 
       do {
-        const left = Math.random() * (vw - width - 40) + 20;
-        const minTop = vh * 0.15;
-        const maxTop = vh * 0.85 - height;
-        const top = Math.random() * (maxTop - minTop) + minTop;
+        // Add margin to prevent cards from touching viewport edges
+        const margin = vw <= 480 ? 15 : 20;
+        const left = Math.random() * Math.max(0, vw - width - margin * 2) + margin;
+        
+        const minTop = vh * 0.12; // Slightly above breaking news area
+        const maxTop = vh * 0.88 - height; // Leave room at bottom
+        const top = Math.random() * Math.max(height, maxTop - minTop) + minTop;
+        
         position = { left, top };
         attempts++;
       } while (checkCollision(position.left, position.top, width, height, existingCards) && attempts < maxAttempts);
+
+      // If no valid position found after max attempts, use a fallback position
+      if (attempts >= maxAttempts) {
+        // Place card in a safe corner area as fallback
+        const cornerPositions = [
+          { left: 20, top: 20 },
+          { left: vw - width - 20, top: 20 },
+          { left: 20, top: vh - height - 20 },
+          { left: vw - width - 20, top: vh - height - 20 }
+        ];
+        
+        // Pick the corner with least collisions
+        let bestCorner = cornerPositions[0];
+        let minCollisions = 999;
+        
+        for (const corner of cornerPositions) {
+          let collisionCount = 0;
+          for (const [_, cardData] of existingCards) {
+            const rect1 = {
+              left: corner.left,
+              right: corner.left + width,
+              top: corner.top,
+              bottom: corner.top + height
+            };
+            const rect2 = {
+              left: cardData.left,
+              right: cardData.left + cardData.width,
+              top: cardData.top,
+              bottom: cardData.top + cardData.height
+            };
+            if (!(rect1.right < rect2.left || rect1.left > rect2.right || rect1.bottom < rect2.top || rect1.top > rect2.bottom)) {
+              collisionCount++;
+            }
+          }
+          if (collisionCount < minCollisions) {
+            minCollisions = collisionCount;
+            bestCorner = corner;
+          }
+        }
+        
+        position = bestCorner;
+      }
 
       return position;
     }
@@ -1676,35 +1750,6 @@
         // Get random position with collision detection
         const pos = getRandomPosition(size.width, size.height, displayedCards);
         let { left, top } = pos;
-        
-        // Adjust position if it overlaps with brand name area (center)
-        const vh = window.innerHeight;
-        const vw = window.innerWidth;
-        const centerY = vh / 2;
-        // Larger brand zone to protect the title
-        const brandZoneTop = centerY - 120;
-        const brandZoneBottom = centerY + 120;
-        const cardBottom = top + size.height;
-        const cardTop = top;
-        
-        // If card overlaps with brand zone, push it away
-        if (cardTop < brandZoneBottom && cardBottom > brandZoneTop) {
-          // Card is in the brand zone - decide to push up or down
-          const distanceToTop = cardTop - brandZoneTop;
-          const distanceToBottom = brandZoneBottom - cardBottom;
-          
-          if (distanceToTop < distanceToBottom) {
-            // Closer to top - push up
-            top = brandZoneTop - size.height - 30;
-          } else {
-            // Closer to bottom - push down
-            top = brandZoneBottom + 30;
-          }
-          
-          // Ensure we stay in viewport
-          if (top < 0) top = brandZoneBottom + 30;
-          if (top + size.height > vh) top = brandZoneTop - size.height - 30;
-        }
         
         card.style.left = left + 'px';
         card.style.top = top + 'px';
@@ -2006,7 +2051,18 @@
     ];
 
     function checkDocCollision(left, top, width, height, excludeDoc) {
-      const padding = 30;
+      const vw = window.innerWidth;
+      
+      // Adaptive padding for documents
+      let padding;
+      if (vw <= 480) {
+        padding = 20; // Tighter on mobile
+      } else if (vw <= 768) {
+        padding = 25; // Medium on tablet
+      } else {
+        padding = 30; // Standard on desktop
+      }
+      
       const rect1 = {
         left: left - padding,
         right: left + width + padding,
@@ -2044,11 +2100,20 @@
       }
 
       // Check collision with center branding
-      const vw = window.innerWidth;
       const vh = window.innerHeight;
       const centerX = vw / 2;
       const centerY = vh / 2;
-      const brandZoneRadius = 320;
+      
+      // Adaptive brand zone radius for docs
+      let brandZoneRadius;
+      if (vw <= 480) {
+        brandZoneRadius = 240; // Smaller on mobile
+      } else if (vw <= 768) {
+        brandZoneRadius = 280; // Medium on tablet
+      } else {
+        brandZoneRadius = 320; // Full on desktop
+      }
+      
       const docCenterX = left + width / 2;
       const docCenterY = top + height / 2;
       const distanceFromCenter = Math.sqrt(Math.pow(docCenterX - centerX, 2) + Math.pow(docCenterY - centerY, 2));
@@ -2079,24 +2144,43 @@
       
       let left, top;
       let attempts = 0;
-      const maxAttempts = 40;
+      
+      // Increase attempts on smaller screens
+      let maxAttempts;
+      if (vw <= 480) {
+        maxAttempts = 80; // More attempts on mobile due to tight space
+      } else if (vw <= 768) {
+        maxAttempts = 60;
+      } else {
+        maxAttempts = 50;
+      }
       
       do {
-        // Position in corners or edges
+        // Position in corners or edges, with margins to prevent edge overlap
+        const margin = vw <= 480 ? 12 : 20;
         const zone = Math.random();
+        
         if (zone < 0.25) {
-          left = Math.random() * (vw * 0.25 - docWidth) + 20;
-          top = Math.random() * (vh - docHeight - 150) + 80;
+          // Top-left area
+          left = Math.random() * Math.max(0, vw * 0.25 - docWidth - margin) + margin;
+          top = Math.random() * (vh * 0.3 - docHeight - margin) + margin;
         } else if (zone < 0.5) {
-          left = vw * 0.75 + Math.random() * (vw * 0.25 - docWidth - 20);
-          top = Math.random() * (vh - docHeight - 150) + 80;
+          // Top-right area
+          left = vw * 0.75 + Math.random() * Math.max(0, vw * 0.25 - docWidth - margin);
+          top = Math.random() * (vh * 0.3 - docHeight - margin) + margin;
         } else if (zone < 0.75) {
-          left = Math.random() * (vw - docWidth - 40) + 20;
-          top = Math.random() * (vh * 0.2) + 60;
+          // Bottom-left area
+          left = Math.random() * Math.max(0, vw * 0.25 - docWidth - margin) + margin;
+          top = vh * 0.65 + Math.random() * Math.max(0, vh * 0.25 - docHeight - margin);
         } else {
-          left = Math.random() * (vw - docWidth - 40) + 20;
-          top = vh * 0.65 + Math.random() * (vh * 0.15);
+          // Bottom-right area
+          left = vw * 0.75 + Math.random() * Math.max(0, vw * 0.25 - docWidth - margin);
+          top = vh * 0.65 + Math.random() * Math.max(0, vh * 0.25 - docHeight - margin);
         }
+        
+        // Ensure within bounds
+        left = Math.max(margin, Math.min(left, vw - docWidth - margin));
+        top = Math.max(margin, Math.min(top, vh - docHeight - margin));
         
         attempts++;
         if (!checkDocCollision(left, top, docWidth, docHeight, excludeDoc) || attempts >= maxAttempts) break;
@@ -2158,35 +2242,6 @@
       // Position with collision detection
       let pos = getRandomDocPosition(doc);
       let { left, top, width, height } = pos;
-      
-      // Adjust position if it overlaps with brand name area (center)
-      const vh = window.innerHeight;
-      const vw = window.innerWidth;
-      const centerY = vh / 2;
-      // Larger brand zone to protect the title
-      const brandZoneTop = centerY - 120;
-      const brandZoneBottom = centerY + 120;
-      const docBottom = top + height;
-      const docTop = top;
-      
-      // If doc overlaps with brand zone, push it away
-      if (docTop < brandZoneBottom && docBottom > brandZoneTop) {
-        // Doc is in the brand zone - decide to push up or down
-        const distanceToTop = docTop - brandZoneTop;
-        const distanceToBottom = brandZoneBottom - docBottom;
-        
-        if (distanceToTop < distanceToBottom) {
-          // Closer to top - push up
-          top = brandZoneTop - height - 25;
-        } else {
-          // Closer to bottom - push down
-          top = brandZoneBottom + 25;
-        }
-        
-        // Ensure we stay in viewport
-        if (top < 0) top = brandZoneBottom + 25;
-        if (top + height > vh) top = brandZoneTop - height - 25;
-      }
       
       doc.style.left = left + 'px';
       doc.style.top = top + 'px';
