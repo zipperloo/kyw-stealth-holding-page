@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "../wealth-manager"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"*.html": "html"
+		},
+		"search.followSymlinks": false,
+		"emmet.includeLanguages": {
+			"django-html": "html",
+			"jinja-html": "html"
+		}
+	}
+}
