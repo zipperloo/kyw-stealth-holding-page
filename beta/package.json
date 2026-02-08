@@ -1,0 +1,25 @@
+{
+  "name": "kyw-website-beta",
+  "version": "0.1.0",
+  "description": "Know Your Worth (KYW) - Beta Website (Password Protected)",
+  "scripts": {
+    "dev": "tailwindcss -i ./src/css/globals.css -o ./assets/css/main.css --watch",
+    "build": "tailwindcss -i ./src/css/globals.css -o ./assets/css/main.css --minify",
+    "encrypt": "npx staticrypt index.html big-idea.html investors.html -p partners-counts-string-walls --short -d . -t \"Know Your Worth - Beta\" --remember 30",
+    "deploy": "npm run build && npm run encrypt"
+  },
+  "keywords": [
+    "SaaS",
+    "Wealth Management",
+    "UHNWI",
+    "Landing Page",
+    "Enterprise"
+  ],
+  "author": "zipperloo",
+  "license": "MIT",
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32"
+  }
+}

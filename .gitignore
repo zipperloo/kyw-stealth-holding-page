@@ -35,6 +35,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+# StatiCrypt config (contains salt)
+.staticrypt.json
+
 # TypeScript v1 declaration files
 typings/
 
