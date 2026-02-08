@@ -20,14 +20,14 @@
 
   <!-- Header / Navigation -->
   <header class="absolute top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-sm">
-    <nav class="page-container py-4 md:py-6">
-      <div class="flex items-center justify-center mb-2 md:mb-4">
-        <a href="index.html" class="text-2xl md:text-3xl lg:text-4xl font-black text-white tracking-tight hover:text-kyw-primary transition-colors">
+    <nav class="page-container py-3 md:py-6">
+      <div class="flex items-center justify-center md:mb-4">
+        <a href="index.html" class="text-xl md:text-3xl lg:text-4xl font-black text-white tracking-tight hover:text-kyw-primary transition-colors">
           KNOW YOUR WORTH
         </a>
       </div>
-      <div class="flex items-center justify-center">
-        <p class="text-white/80 text-xs md:text-sm lg:text-base font-medium tracking-wide text-center">
+      <div class="hidden md:flex items-center justify-center">
+        <p class="text-white/80 text-sm lg:text-base font-medium tracking-wide text-center">
           Multi-Entity | Multi-Currency | Every Asset Class | AI Assistant
         </p>
       </div>
@@ -65,27 +65,27 @@
         <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
 
         <!-- Hero Content (relative — determines container height, never overflows) -->
-        <div class="relative z-10 min-h-[500px] md:min-h-[650px] lg:min-h-[800px] flex items-center pt-28 md:pt-36 pb-20 md:pb-24">
+        <div class="relative z-10 min-h-[420px] md:min-h-[650px] lg:min-h-[800px] flex items-center pt-16 md:pt-36 pb-14 md:pb-24">
           <div class="page-container">
             <div class="max-w-2xl">
-              <h1 class="text-3xl md:text-4xl lg:text-6xl font-bold text-white leading-[1.1] mb-4 md:mb-6">
+              <h1 class="text-2xl md:text-4xl lg:text-6xl font-bold text-white leading-[1.1] mb-3 md:mb-6">
                 Take back control
               </h1>
-              <p class="text-base md:text-xl lg:text-2xl text-white/90 leading-relaxed mb-4 md:mb-8">
+              <p class="hidden md:block text-xl lg:text-2xl text-white/90 leading-relaxed mb-4">
                 KYW unifies your entire investment and wealth universe, with native AI chat interface, plus built-in bookkeeping for individuals, investment companies, and trusts.
               </p>
-              <p class="text-base md:text-xl lg:text-2xl text-white/90 leading-relaxed mb-6 md:mb-8">
+              <p class="text-sm md:text-xl lg:text-2xl text-white/90 leading-relaxed mb-4 md:mb-8">
                 Family office capabilities. Retail investor pricing.
               </p>
-              <div class="flex flex-col sm:flex-row gap-3 md:gap-4">
-                <a href="big-idea.html" class="btn-primary text-center shadow-lg shadow-kyw-primary/20">
+              <div class="flex flex-wrap gap-3 md:gap-4">
+                <a href="big-idea.html" class="btn-primary text-center shadow-lg shadow-kyw-primary/20 w-full sm:w-auto">
                   What's the Big Idea
                 </a>
-                <button class="btn-secondary border-white/30 text-white hover:bg-white/20 bg-white/10 backdrop-blur-sm">
-                  Explore the Platform
+                <button class="btn-secondary flex-1 sm:flex-initial border-white/30 text-white hover:bg-white/20 bg-white/10 backdrop-blur-sm">
+                  <span class="sm:hidden">Platform</span><span class="hidden sm:inline">Explore the Platform</span>
                 </button>
-                <a href="investors.html" class="btn-secondary border-white/30 text-white hover:bg-white/20 bg-white/10 backdrop-blur-sm text-center">
-                  Investors Invited
+                <a href="investors.html" class="btn-secondary flex-1 sm:flex-initial border-white/30 text-white hover:bg-white/20 bg-white/10 backdrop-blur-sm text-center">
+                  <span class="sm:hidden">Investors</span><span class="hidden sm:inline">Investors Invited</span>
                 </a>
               </div>
             </div>
@@ -135,19 +135,19 @@
           <div class="relative">
             <div class="absolute -top-8 -left-4 text-kyw-primary/20 text-[80px] md:text-[120px] font-serif leading-none select-none">&ldquo;</div>
             <div class="relative z-10 space-y-4 md:space-y-6">
-              <p class="text-lg md:text-2xl lg:text-3xl text-kyw-text font-medium leading-relaxed">
+              <p class="text-base md:text-2xl lg:text-3xl text-kyw-text font-medium leading-relaxed">
                 Right now, you're a client in everyone else's system. Their reports. Their timelines. Their rear-view mirror. A firehose of fragmented information you can't consume.
               </p>
-              <p class="text-base md:text-lg lg:text-xl text-kyw-text-secondary leading-relaxed">
+              <p class="text-sm md:text-lg lg:text-xl text-kyw-text-secondary leading-relaxed">
                 Advisors exist so you don't have to think about it. But fee drag compounds. Exotic investments justify the relationship while adding more layers and more cost. Often, simpler performs better. You know this but you're paralysed by complexity.
               </p>
-              <p class="text-base md:text-lg lg:text-xl text-kyw-text-secondary leading-relaxed">
+              <p class="text-sm md:text-lg lg:text-xl text-kyw-text-secondary leading-relaxed">
                 It's not just investment managers. Tax advisors, lawyers, accountants &mdash; half their billable hours are spent chasing you for information. What if it already lived in a system they could access? What if everyone connected to <em class="text-kyw-text not-italic font-medium">your</em> system?
               </p>
-              <p class="text-base md:text-lg lg:text-xl text-kyw-text-secondary leading-relaxed">
+              <p class="text-sm md:text-lg lg:text-xl text-kyw-text-secondary leading-relaxed">
                 Love your bank? Trust your advisors? Good. Keep them, like me. KYW just makes those relationships sharper &mdash; a single source of truth for your balance sheet.
               </p>
-              <p class="text-lg md:text-xl lg:text-2xl text-kyw-text font-semibold leading-relaxed pt-2 md:pt-4">
+              <p class="text-base md:text-xl lg:text-2xl text-kyw-text font-semibold leading-relaxed pt-2 md:pt-4">
                 You didn't get here by accident.<br/>
                 <span class="text-kyw-primary">Know Your Worth.</span>
               </p>
