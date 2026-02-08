@@ -38,6 +38,9 @@ jspm_packages/
 # StatiCrypt config (contains salt)
 .staticrypt.json
 
+# Decrypted test output (from staticrypt --decrypt)
+beta/decrypted/
+
 # TypeScript v1 declaration files
 typings/
 

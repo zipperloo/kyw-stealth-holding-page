@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "tailwindcss -i ./src/css/globals.css -o ./assets/css/main.css --watch",
     "build": "tailwindcss -i ./src/css/globals.css -o ./assets/css/main.css --minify",
-    "encrypt": "npx staticrypt index.html big-idea.html investors.html -p partners-counts-string-walls --short -d . -t \"Know Your Worth - Beta\" --remember 30",
+    "encrypt": "npx staticrypt src/pages/index.html src/pages/big-idea.html src/pages/investors.html -p partners-counts-string-walls --short -d . --template-title \"Know Your Worth - Beta\" --remember 30 -t password_template.html",
     "deploy": "npm run build && npm run encrypt"
   },
   "keywords": [
