@@ -52,7 +52,8 @@
         setInterval(() => { this.currentSlide = (this.currentSlide + 1) % this.slides.length }, 5000)
       }
     }">
-      <div class="relative h-[560px] md:h-[650px] lg:h-[800px] w-full">
+      <div class="relative w-full overflow-hidden">
+        <!-- Background Images (absolute — fill whatever height the content creates) -->
         <template x-for="(slide, index) in slides" :key="index">
           <img
             :src="slide"
@@ -63,20 +64,8 @@
         </template>
         <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
 
-        <!-- Slide Indicators -->
-        <div class="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-10">
-          <template x-for="(slide, index) in slides" :key="'dot-'+index">
-            <button
-              @click="currentSlide = index"
-              class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full transition-all duration-300"
-              :class="currentSlide === index ? 'bg-kyw-primary w-6 md:w-8' : 'bg-white/50 hover:bg-white/80'"
-              :aria-label="'Go to slide ' + (index + 1)"
-            ></button>
-          </template>
-        </div>
-
-        <!-- Hero Content Overlay -->
-        <div class="absolute inset-0 flex items-center pt-24 md:pt-32">
+        <!-- Hero Content (relative — determines container height, never overflows) -->
+        <div class="relative z-10 min-h-[500px] md:min-h-[650px] lg:min-h-[800px] flex items-center pt-28 md:pt-36 pb-20 md:pb-24">
           <div class="page-container">
             <div class="max-w-2xl">
               <h1 class="text-3xl md:text-4xl lg:text-6xl font-bold text-white leading-[1.1] mb-4 md:mb-6">
@@ -101,6 +90,18 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- Slide Indicators -->
+        <div class="absolute bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+          <template x-for="(slide, index) in slides" :key="'dot-'+index">
+            <button
+              @click="currentSlide = index"
+              class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full transition-all duration-300"
+              :class="currentSlide === index ? 'bg-kyw-primary w-6 md:w-8' : 'bg-white/50 hover:bg-white/80'"
+              :aria-label="'Go to slide ' + (index + 1)"
+            ></button>
+          </template>
         </div>
       </div>
 

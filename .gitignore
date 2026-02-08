@@ -41,6 +41,9 @@ jspm_packages/
 # Decrypted test output (from staticrypt --decrypt)
 beta/decrypted/
 
+# Dev junction (symlink so src/pages can resolve assets/css/main.css)
+beta/src/pages/assets
+
 # TypeScript v1 declaration files
 typings/
 
