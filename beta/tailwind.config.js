@@ -5,6 +5,18 @@ module.exports = {
     './src/**/*.js',
   ],
   theme: {
+    /**
+     * BREAKPOINTS (Tailwind defaults — documented here for clarity)
+     * Mobile-first: bare classes = mobile, then layer up.
+     *
+     *   sm  → 640px   (large phones, landscape)
+     *   md  → 768px   (tablets / iPad portrait)
+     *   lg  → 1024px  (iPad landscape / small laptops)
+     *   xl  → 1280px  (desktops)
+     *   2xl → 1536px  (large desktops)
+     *
+     * Usage:  class="text-base md:text-lg lg:text-xl"
+     */
     extend: {
       colors: {
         'kyw-primary': '#604de4',
@@ -36,8 +48,40 @@ module.exports = {
         '3xl': '48px',
       },
       lineHeight: {
-        'heading': '1.2',
-        'body': '1.5',
+        heading: '1.2',
+        body: '1.5',
+      },
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: '1rem',     /* 16px  — mobile */
+          sm: '1.5rem',        /* 24px  — large phones */
+          md: '2rem',          /* 32px  — tablets */
+          lg: '4rem',          /* 64px  — laptops */
+          xl: '5rem',          /* 80px  — desktops */
+          '2xl': '6rem',       /* 96px  — large desktops */
+        },
+      },
+      maxWidth: {
+        'content': '72rem',    /* 1152px — max content width */
+        'narrow': '40rem',     /* 640px  — narrow content (text blocks) */
+        'wide': '90rem',       /* 1440px — wide content (dashboards) */
+      },
+      fontSize: {
+        /* Responsive type scale — use with breakpoint prefixes */
+        'display': ['3.5rem', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+        'display-sm': ['2.5rem', { lineHeight: '1.15', letterSpacing: '-0.02em' }],
+        'heading-1': ['2.25rem', { lineHeight: '1.2', letterSpacing: '-0.015em' }],
+        'heading-2': ['1.75rem', { lineHeight: '1.25', letterSpacing: '-0.01em' }],
+        'heading-3': ['1.375rem', { lineHeight: '1.3' }],
+        'body-lg': ['1.125rem', { lineHeight: '1.6' }],
+        'body': ['1rem', { lineHeight: '1.6' }],
+        'body-sm': ['0.875rem', { lineHeight: '1.5' }],
+        'caption': ['0.75rem', { lineHeight: '1.4' }],
+      },
+      borderRadius: {
+        'card': '16px',
+        'button': '10px',
       },
     },
   },
