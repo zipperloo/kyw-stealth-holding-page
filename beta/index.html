@@ -22,17 +22,17 @@
     }
     .hidden { display: none !important; }
     .orb { position: fixed; border-radius: 50%; filter: blur(100px); mix-blend-mode: screen; pointer-events: none; }
-    .orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, #604de4 0%, transparent 70%); top: -200px; right: -100px; opacity: 0.2; }
-    .orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, #4c6ef5 0%, transparent 70%); bottom: -100px; left: -100px; opacity: 0.15; }
-    .staticrypt-container { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; position: relative; z-index: 10; }
-    .staticrypt-card { background: rgba(26, 29, 41, 0.9); border: 1px solid #2d3142; border-radius: 16px; padding: 48px 40px; max-width: 440px; width: 100%; text-align: center; backdrop-filter: blur(20px); }
-    .staticrypt-brand { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.025em; margin-bottom: 8px; background: linear-gradient(135deg, #604de4, #4c6ef5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .staticrypt-badge { display: inline-block; background: rgba(96, 77, 228, 0.15); color: #604de4; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 999px; margin-bottom: 24px; }
-    .staticrypt-subtitle { color: #9ca3af; font-size: 0.95rem; margin-bottom: 32px; line-height: 1.5; }
+    .orb-1 { width: 300px; height: 300px; background: radial-gradient(circle, #604de4 0%, transparent 70%); top: -150px; right: -80px; opacity: 0.15; }
+    .orb-2 { width: 250px; height: 250px; background: radial-gradient(circle, #4c6ef5 0%, transparent 70%); bottom: -80px; left: -80px; opacity: 0.1; }
+    .staticrypt-container { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 16px; position: relative; z-index: 10; }
+    .staticrypt-card { background: rgba(26, 29, 41, 0.9); border: 1px solid #2d3142; border-radius: 16px; padding: 32px 20px; max-width: 440px; width: 100%; text-align: center; backdrop-filter: blur(20px); }
+    .staticrypt-brand { font-size: 1.25rem; font-weight: 900; letter-spacing: -0.025em; margin-bottom: 8px; background: linear-gradient(135deg, #604de4, #4c6ef5); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .staticrypt-badge { display: inline-block; background: rgba(96, 77, 228, 0.15); color: #604de4; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 999px; margin-bottom: 16px; }
+    .staticrypt-subtitle { color: #9ca3af; font-size: 0.875rem; margin-bottom: 24px; line-height: 1.5; }
     .staticrypt-password-container { position: relative; margin-bottom: 16px; }
     .staticrypt-password-container input[type="password"],
     .staticrypt-password-container input[type="text"] {
-      width: 100%; padding: 14px 44px 14px 16px; background: #0f1117; border: 1px solid #2d3142; border-radius: 10px; color: #e4e6eb; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s;
+      width: 100%; padding: 12px 44px 12px 14px; background: #0f1117; border: 1px solid #2d3142; border-radius: 10px; color: #e4e6eb; font-size: 16px; font-family: inherit; outline: none; transition: border-color 0.2s;
     }
     .staticrypt-password-container input:focus { border-color: #604de4; }
     .staticrypt-password-container input::placeholder { color: #6b7280; }
@@ -41,11 +41,25 @@
     .staticrypt-decrypt-button:hover { background: #7c6ef0; }
     label.staticrypt-remember { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 16px 0 16px; color: #9ca3af; font-size: 0.85rem; }
     .staticrypt-remember input[type="checkbox"] { accent-color: #604de4; transform: scale(1.3); }
-    .staticrypt-back-link { display: inline-block; margin-top: 24px; color: #6b7280; font-size: 0.85rem; text-decoration: none; transition: color 0.2s; }
+    .staticrypt-back-link { display: inline-block; margin-top: 20px; color: #6b7280; font-size: 0.85rem; text-decoration: none; transition: color 0.2s; }
     .staticrypt-back-link:hover { color: #604de4; }
     .staticrypt-spinner-container { height: 100%; display: flex; align-items: center; justify-content: center; }
     .staticrypt-spinner { display: inline-block; width: 2rem; height: 2rem; border: 0.25em solid #604de4; border-right-color: transparent; border-radius: 50%; animation: spinner-border 0.75s linear infinite; }
     @keyframes spinner-border { 100% { transform: rotate(360deg); } }
+
+    /* Tablet and up */
+    @media (min-width: 768px) {
+      .orb-1 { width: 500px; height: 500px; top: -200px; right: -100px; opacity: 0.2; }
+      .orb-2 { width: 400px; height: 400px; bottom: -100px; left: -100px; opacity: 0.15; }
+      .staticrypt-container { padding: 20px; }
+      .staticrypt-card { padding: 48px 40px; }
+      .staticrypt-brand { font-size: 1.5rem; }
+      .staticrypt-badge { font-size: 0.75rem; margin-bottom: 24px; }
+      .staticrypt-subtitle { font-size: 0.95rem; margin-bottom: 32px; }
+      .staticrypt-password-container input[type="password"],
+      .staticrypt-password-container input[type="text"] { padding: 14px 44px 14px 16px; }
+      .staticrypt-back-link { margin-top: 24px; }
+    }
   </style>
 </head>
 <body class="staticrypt-body">
