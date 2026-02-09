@@ -34,33 +34,62 @@
   </header>
 
   <main>
-    <!-- Hero Section — V1: The Showcase -->
+    <!-- Hero Section — Editorial Split with Stat Bar -->
     <section class="relative bg-kyw-bg overflow-hidden">
-      <div class="relative z-10 pt-28 md:pt-40 pb-8 md:pb-16">
-        <div class="page-container text-center">
-          <div class="text-kyw-primary text-xs font-bold uppercase tracking-widest mb-4 md:mb-6">Wealth Management Platform</div>
-          <h1 class="text-4xl md:text-5xl lg:text-7xl font-bold text-white leading-[1.08] mb-4 md:mb-6 tracking-tight">
-            Take back control
-          </h1>
-          <p class="text-base md:text-xl lg:text-2xl text-white/60 leading-relaxed mb-6 md:mb-8 max-w-2xl mx-auto">
-            Your entire wealth universe &mdash; investments, bookkeeping, property, advisors &mdash; in one platform. Sign up like Netflix. Priced for individuals.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-3 justify-center mb-10 md:mb-16">
-            <a href="big-idea.html" class="btn-primary text-center shadow-lg shadow-kyw-primary/20 w-full sm:w-auto">
-              The Big Idea
-            </a>
-            <a href="investors.html" class="hidden sm:inline-flex btn-secondary text-center">
-              Investors Invited
-            </a>
+      <div class="relative z-10 pt-24 md:pt-36 lg:pt-44 pb-12 md:pb-20">
+        <div class="page-container">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+            <!-- Text Column -->
+            <div>
+              <div class="text-kyw-primary text-xs font-bold uppercase tracking-widest mb-3 md:mb-4">Wealth Management Platform</div>
+              <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.08] mb-4 md:mb-6 tracking-tight">
+                Take back<br class="hidden md:block"/> control
+              </h1>
+              <p class="text-base md:text-lg lg:text-xl text-white/60 leading-relaxed mb-3">
+                Your entire wealth universe &mdash; investments, bookkeeping, property, advisors &mdash; in one platform.
+              </p>
+              <p class="text-base md:text-lg text-white/80 font-medium leading-relaxed mb-6 md:mb-8">
+                Sign up like Netflix. Priced for individuals.
+              </p>
+              <a href="big-idea.html" class="btn-primary text-center shadow-lg shadow-kyw-primary/20 w-full sm:w-auto">
+                The Big Idea
+              </a>
+              <div class="hidden sm:flex gap-4 mt-4">
+                <a href="investors.html" class="btn-secondary text-center">
+                  Investors Invited
+                </a>
+              </div>
+            </div>
+            <!-- Image Column -->
+            <div class="relative">
+              <div class="absolute -inset-4 bg-gradient-to-br from-kyw-primary/20 to-blue-600/10 rounded-3xl blur-2xl"></div>
+              <img
+                src="assets/images/hero-3.png"
+                alt="Professional managing wealth on the go in first class"
+                class="relative w-full rounded-2xl md:rounded-3xl shadow-2xl border border-white/10"
+              />
+            </div>
           </div>
-          <!-- Contained hero image with glow -->
-          <div class="relative mx-auto max-w-4xl">
-            <div class="absolute -inset-4 bg-gradient-to-br from-kyw-primary/20 to-purple-600/10 rounded-3xl blur-2xl"></div>
-            <img
-              src="assets/images/hero-1.png"
-              alt="Professional managing wealth portfolio on multi-screen setup"
-              class="relative w-full rounded-2xl md:rounded-3xl shadow-2xl border border-white/10"
-            />
+          <!-- Floating stat bar — SaaS | Full Stack | AI Native -->
+          <div class="mt-8 md:mt-12">
+            <div class="max-w-2xl mx-auto">
+              <div class="bg-kyw-surface/90 backdrop-blur-md rounded-xl md:rounded-2xl border border-kyw-border/50 shadow-xl p-4 md:p-6">
+                <div class="grid grid-cols-3 gap-4 text-center">
+                  <div>
+                    <div class="text-base md:text-xl font-bold text-kyw-primary">SaaS</div>
+                    <div class="text-[10px] md:text-xs text-kyw-text-secondary mt-0.5">Sign up &amp; start</div>
+                  </div>
+                  <div class="border-x border-kyw-border/30">
+                    <div class="text-base md:text-xl font-bold text-kyw-primary">Full Stack</div>
+                    <div class="text-[10px] md:text-xs text-kyw-text-secondary mt-0.5">Transactions up</div>
+                  </div>
+                  <div>
+                    <div class="text-base md:text-xl font-bold text-kyw-primary">AI Native</div>
+                    <div class="text-[10px] md:text-xs text-kyw-text-secondary mt-0.5">Chat &amp; voice</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -123,6 +152,13 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Image Interstitial — London meeting -->
+    <div class="relative overflow-hidden">
+      <img src="assets/images/hero-2.png" alt="Professional meeting in London financial district"
+        class="w-full h-40 sm:h-56 md:h-72 lg:h-80 object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-r from-kyw-bg/80 via-kyw-bg/30 to-kyw-bg/80"></div>
     </div>
 
     <!-- Cash Account / ERP Section -->
@@ -318,6 +354,13 @@
         </div>
       </div>
     </section>
+
+    <!-- Image Interstitial — Dashboard collaboration -->
+    <div class="relative overflow-hidden">
+      <img src="assets/images/hero-4.png" alt="Team reviewing portfolio dashboards together"
+        class="w-full h-40 sm:h-56 md:h-72 lg:h-80 object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-r from-kyw-bg/80 via-kyw-bg/30 to-kyw-bg/80"></div>
+    </div>
 
     <!-- AI Assistant Section -->
     <section class="section">
@@ -768,6 +811,13 @@
         </div>
       </div>
     </section>
+
+    <!-- Image Interstitial — Lifestyle -->
+    <div class="relative overflow-hidden">
+      <img src="assets/images/hero-7.png" alt="Family enjoying quality time outdoors"
+        class="w-full h-40 sm:h-56 md:h-72 lg:h-80 object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-r from-kyw-bg/80 via-kyw-bg/30 to-kyw-bg/80"></div>
+    </div>
 
     <!-- Features Grid Section -->
     <section class="section">

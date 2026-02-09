@@ -34,38 +34,45 @@
   </header>
 
   <main>
-    <!-- Hero Section — V3: The Cinematic -->
+    <!-- Hero Section — Editorial Split with Stat Bar -->
     <section class="relative bg-kyw-bg overflow-hidden">
-      <div class="relative z-10 pt-24 md:pt-36 pb-4 md:pb-8">
+      <div class="relative z-10 pt-24 md:pt-36 lg:pt-44 pb-12 md:pb-20">
         <div class="page-container">
-          <!-- Headline block -->
-          <div class="text-center mb-8 md:mb-12">
-            <div class="text-kyw-primary text-xs font-bold uppercase tracking-widest mb-4 md:mb-6">Wealth Management Platform</div>
-            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] mb-4 md:mb-6 tracking-tight">
-              Take back control
-            </h1>
-            <p class="text-base md:text-xl text-white/50 max-w-xl mx-auto mb-6 md:mb-8">
-              Family office capabilities. Retail investor pricing.
-            </p>
-            <a href="big-idea.html" class="btn-primary text-center shadow-lg shadow-kyw-primary/20">
-              The Big Idea
-            </a>
-          </div>
-          <!-- Cinematic image band -->
-          <div class="relative mx-auto max-w-5xl">
-            <div class="absolute -inset-4 bg-gradient-to-r from-kyw-primary/15 via-purple-600/10 to-blue-600/15 rounded-3xl blur-3xl"></div>
-            <div class="relative overflow-hidden rounded-2xl md:rounded-3xl border border-white/10 shadow-2xl">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+            <!-- Text Column -->
+            <div>
+              <div class="text-kyw-primary text-xs font-bold uppercase tracking-widest mb-3 md:mb-4">Wealth Management Platform</div>
+              <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.08] mb-4 md:mb-6 tracking-tight">
+                Take back<br class="hidden md:block"/> control
+              </h1>
+              <p class="text-base md:text-lg lg:text-xl text-white/60 leading-relaxed mb-3">
+                Your entire wealth universe &mdash; investments, bookkeeping, property, advisors &mdash; in one platform.
+              </p>
+              <p class="text-base md:text-lg text-white/80 font-medium leading-relaxed mb-6 md:mb-8">
+                Sign up like Netflix. Priced for individuals.
+              </p>
+              <a href="big-idea.html" class="btn-primary text-center shadow-lg shadow-kyw-primary/20 w-full sm:w-auto">
+                The Big Idea
+              </a>
+              <div class="hidden sm:flex gap-4 mt-4">
+                <a href="investors.html" class="btn-secondary text-center">
+                  Investors Invited
+                </a>
+              </div>
+            </div>
+            <!-- Image Column -->
+            <div class="relative">
+              <div class="absolute -inset-4 bg-gradient-to-br from-kyw-primary/20 to-blue-600/10 rounded-3xl blur-2xl"></div>
               <img
-                src="assets/images/hero-5.png"
-                alt="Modern family managing wealth from luxury home"
-                class="w-full h-48 sm:h-64 md:h-80 lg:h-96 object-cover"
+                src="assets/images/hero-3.png"
+                alt="Professional managing wealth on the go in first class"
+                class="relative w-full rounded-2xl md:rounded-3xl shadow-2xl border border-white/10"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-kyw-bg/90 via-transparent to-kyw-bg/20"></div>
             </div>
           </div>
-          <!-- Floating stat bar overlapping the image -->
-          <div class="relative z-10 -mt-8 md:-mt-12 mb-4">
-            <div class="max-w-2xl mx-auto px-4">
+          <!-- Floating stat bar — SaaS | Full Stack | AI Native -->
+          <div class="mt-8 md:mt-12">
+            <div class="max-w-2xl mx-auto">
               <div class="bg-kyw-surface/90 backdrop-blur-md rounded-xl md:rounded-2xl border border-kyw-border/50 shadow-xl p-4 md:p-6">
                 <div class="grid grid-cols-3 gap-4 text-center">
                   <div>
@@ -112,9 +119,10 @@
       </div>
     </div>
 
-    <!-- Founder Statement -->
-    <div class="bg-kyw-surface section">
-      <div class="page-container-narrow">
+    <!-- Founder Statement — with background image -->
+    <div class="relative bg-kyw-surface section overflow-hidden">
+      <img src="assets/images/hero-5.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-[0.08] mix-blend-luminosity" />
+      <div class="page-container-narrow relative z-10">
         <div class="relative">
           <div class="absolute -top-8 -left-4 text-kyw-primary/20 text-[60px] md:text-[120px] font-serif leading-none select-none">&ldquo;</div>
           <div class="relative z-10 space-y-4 md:space-y-6">
@@ -341,9 +349,11 @@
       </div>
     </section>
 
-    <!-- AI Assistant Section -->
-    <section class="section">
-      <div class="page-container">
+    <!-- AI Assistant Section — with background image -->
+    <section class="relative section overflow-hidden">
+      <img src="assets/images/hero-2.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-[0.06]" />
+      <div class="absolute inset-0 bg-kyw-bg/80"></div>
+      <div class="page-container relative z-10">
         <div class="card p-5 md:p-10 lg:p-16">
           <div class="grid-2 items-center">
             <div class="space-y-4 md:space-y-6">
@@ -943,9 +953,11 @@
       </div>
     </section>
 
-    <!-- Final CTA -->
-    <section class="bg-kyw-surface border-t border-kyw-border section">
-      <div class="page-container-narrow text-center">
+    <!-- Final CTA — with background image -->
+    <section class="relative border-t border-kyw-border section overflow-hidden">
+      <img src="assets/images/hero-7.png" alt="" class="absolute inset-0 w-full h-full object-cover opacity-[0.12]" />
+      <div class="absolute inset-0 bg-kyw-surface/85"></div>
+      <div class="page-container-narrow text-center relative z-10">
         <h2 class="text-section mb-4 md:mb-6">Ready to master your wealth?</h2>
         <p class="text-lead mb-8 md:mb-12">
           Join UHNWI wealth managers and family offices who trust KYW for enterprise-grade portfolio management.
