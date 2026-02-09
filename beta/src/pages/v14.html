@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Know Your Worth - Your wealth deserves a system, not a committee.">
+  <meta name="theme-color" content="#0f1117">
+  <title>Know Your Worth — V14 The Complete Pitch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Alex+Brush&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <style>
+    /* =============================================
+       V14 — THE COMPLETE PITCH
+       Best-of hybrid: V8 photo cards, V10 narrative,
+       V7 premium type, V11 product mockup.
+       ============================================= */
+
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* ── Hero with background image ── */
+    .hero-bg {
+      position: relative;
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 17, 23, 0.40) 0%,
+        rgba(15, 17, 23, 0.60) 35%,
+        rgba(15, 17, 23, 0.88) 75%,
+        #0f1117 100%
+      );
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/hero-5.png') center center / cover no-repeat;
+      z-index: -1;
+    }
+
+    /* ── Narrow reading column ── */
+    .page-container-narrow {
+      max-width: 42rem;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+    @media (min-width: 768px) {
+      .page-container-narrow {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
+
+    /* ── Browser chrome frame ── */
+    .browser-frame {
+      border: 1px solid #2d3142;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #1a1d29;
+    }
+    @media (min-width: 768px) {
+      .browser-frame {
+        border-radius: 16px;
+      }
+    }
+    .browser-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: #12141e;
+      border-bottom: 1px solid #2d3142;
+    }
+    .browser-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .browser-dot--red { background: rgba(255, 95, 87, 0.6); }
+    .browser-dot--yellow { background: rgba(254, 188, 46, 0.6); }
+    .browser-dot--green { background: rgba(40, 200, 64, 0.6); }
+    .browser-url {
+      flex: 1;
+      text-align: center;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 11px;
+      color: #6b7280;
+    }
+    .frame-glow {
+      box-shadow:
+        0 4px 60px rgba(96, 77, 228, 0.12),
+        0 0 120px rgba(96, 77, 228, 0.06);
+    }
+
+    /* ── Photo cards ── */
+    .photo-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      cursor: default;
+    }
+    .photo-card img {
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .photo-card:hover img {
+      transform: scale(1.05);
+    }
+
+    /* ── Founder section subtle background ── */
+    .founder-bg {
+      position: relative;
+      overflow: hidden;
+    }
+    .founder-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/hero-7.png') center center / cover no-repeat;
+      opacity: 0.07;
+      z-index: 0;
+    }
+    .founder-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 50%, transparent 0%, #0f1117 75%);
+      z-index: 0;
+    }
+
+    /* ── Glow CTA ── */
+    .glow-btn {
+      box-shadow:
+        0 0 20px rgba(96, 77, 228, 0.3),
+        0 0 60px rgba(96, 77, 228, 0.1);
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+    }
+    .glow-btn:hover {
+      box-shadow:
+        0 0 30px rgba(96, 77, 228, 0.45),
+        0 0 80px rgba(96, 77, 228, 0.15);
+      transform: translateY(-1px);
+    }
+
+    /* ── Ghost button (hero) ── */
+    .btn-ghost-hero {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.5rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9375rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .btn-ghost-hero:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.35);
+      color: #fff;
+    }
+
+    /* ── Trust bar at base of hero ── */
+    .trust-bar {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(15, 17, 23, 0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    /* ── Inline stat pills under browser mockup ── */
+    .inline-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .inline-stats .stat-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #e4e6eb;
+      letter-spacing: -0.01em;
+    }
+    .inline-stats .stat-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #604de4;
+      flex-shrink: 0;
+    }
+
+    /* ── Signature ── */
+    .font-signature {
+      font-family: 'Alex Brush', cursive;
+    }
+
+    /* ── Scroll fade-in ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Final CTA radial gradient ── */
+    .final-cta-bg {
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(96, 77, 228, 0.15) 0%, transparent 60%),
+        #0f1117;
+    }
+
+    /* ── Gradient divider ── */
+    .gradient-divider {
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #2d3142, transparent);
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+
+  <!-- ========================================
+       ACT 0: STICKY NAV
+       ======================================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-kyw-bg/80 backdrop-blur-xl border-b border-kyw-border/50">
+    <nav class="page-container">
+      <div class="flex items-center justify-between py-3 md:py-4">
+        <!-- Logo: bold, tracked-tight wordmark -->
+        <a href="index.html" class="text-base md:text-lg font-bold text-white tracking-tight" style="text-decoration:none;">
+          KNOW YOUR WORTH
+        </a>
+        <!-- CTA -->
+        <a href="#start" class="btn-primary text-sm !py-2 !px-4 md:!py-2.5 md:!px-6">
+          Start Free Trial
+        </a>
+      </div>
+    </nav>
+  </header>
+
+
+  <main>
+
+    <!-- ========================================
+         ACT 1: THE HOOK
+         Hero — hero-5.png (family, mountains)
+         ======================================== -->
+    <section class="hero-bg min-h-[90vh] md:min-h-screen flex flex-col justify-center">
+      <div class="relative z-10 pt-24 md:pt-32 pb-12 md:pb-20">
+        <div class="page-container">
+          <div class="max-w-3xl">
+
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-5 md:mb-6">
+              Your wealth deserves<br />a system, not a committee.
+            </h1>
+
+            <p class="text-lg md:text-xl text-white/70 leading-relaxed max-w-2xl mb-8 md:mb-10">
+              The platform that replaces spreadsheets, PDFs, and expensive middlemen
+              with one intelligent system.
+            </p>
+
+            <!-- Dual CTAs -->
+            <div class="flex flex-wrap items-center gap-3 md:gap-4">
+              <a href="#start" class="btn-primary glow-btn text-base !py-3 !px-7">
+                Start Free Trial
+              </a>
+              <a href="#story" class="btn-ghost-hero">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+                Watch the story
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust bar pinned to bottom of hero -->
+      <div class="trust-bar mt-auto py-3.5 md:py-4">
+        <div class="page-container">
+          <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1.5 text-xs md:text-sm text-white/40 font-medium tracking-wide">
+            <span>10,000+ banks</span>
+            <span class="text-white/15">|</span>
+            <span>180+ currencies</span>
+            <span class="text-white/15">|</span>
+            <span>Every asset class</span>
+            <span class="text-white/15">|</span>
+            <span>AI native</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         ACT 2: THE PROBLEM
+         Brief, punchy, narrative voice.
+         ======================================== -->
+    <section class="bg-kyw-bg fade-up" style="padding-top:4rem; padding-bottom:4rem;">
+      <div class="page-container-narrow text-center" style="padding-top:1rem; padding-bottom:1rem;">
+
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-5 md:mb-6">
+          Right now, you're a client<br class="hidden md:block" />
+          in everyone else's system.
+        </h2>
+
+        <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed max-w-xl mx-auto">
+          Your financial advisor charges 1% and sends quarterly reports you never read.
+          Your accountant is always a quarter behind. Your lawyer doesn't talk to
+          either of them. You end up chasing PDFs, reconciling spreadsheets, and
+          wondering if anyone actually has the full picture.
+          Nobody does.
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- Divider -->
+    <hr class="gradient-divider" />
+
+
+    <!-- ========================================
+         ACT 3a: THE SOLUTION — BROWSER MOCKUP
+         One platform. Total control.
+         ======================================== -->
+    <section class="section-sm bg-kyw-bg fade-up">
+      <div class="page-container">
+
+        <!-- Section heading -->
+        <div class="text-center mb-8 md:mb-10">
+          <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-3">
+            One platform. Total control.
+          </h2>
+          <p class="text-base md:text-lg text-kyw-text-secondary max-w-xl mx-auto">
+            Everything about your money, in one place, in real time.
+          </p>
+        </div>
+
+        <!-- Browser frame with hero-1.png -->
+        <div class="max-w-5xl mx-auto mb-8 md:mb-10">
+          <div class="browser-frame frame-glow">
+            <div class="browser-titlebar">
+              <div class="flex gap-1.5">
+                <span class="browser-dot browser-dot--red"></span>
+                <span class="browser-dot browser-dot--yellow"></span>
+                <span class="browser-dot browser-dot--green"></span>
+              </div>
+              <span class="browser-url">app.knowyourworth.com</span>
+              <!-- Spacer to balance the dots -->
+              <div class="w-[46px]"></div>
+            </div>
+            <img
+              src="assets/images/hero-1.png"
+              alt="KYW Platform — unified wealth dashboard with multi-asset portfolio view"
+              class="w-full block"
+              style="display:block;"
+            />
+          </div>
+        </div>
+
+        <!-- Three inline stats below the mockup -->
+        <div class="inline-stats">
+          <span class="stat-label">Real-time bookkeeping</span>
+          <span class="stat-dot"></span>
+          <span class="stat-label">AI assistant</span>
+          <span class="stat-dot"></span>
+          <span class="stat-label">Every asset class</span>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         ACT 3b: THREE PHOTO CARDS
+         V8-style: image fills card, gradient overlay,
+         text at bottom. Hover scales image.
+         ======================================== -->
+    <section class="section bg-kyw-bg fade-up">
+      <div class="page-container">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 lg:gap-6">
+
+          <!-- Card 1: See Everything — hero-4.png -->
+          <div class="photo-card">
+            <img
+              src="assets/images/hero-4.png"
+              alt="Two professionals reviewing wealth dashboards together"
+              class="w-full h-64 sm:h-72 md:h-80 object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-5 md:p-7">
+              <h3 class="text-white text-xl md:text-2xl font-bold mb-2">
+                See Everything
+              </h3>
+              <p class="text-white/70 text-sm md:text-base leading-relaxed">
+                Every account, entity, and currency &mdash;
+                one dashboard with real bookkeeping.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 2: Ask Anything — hero-3.png -->
+          <div class="photo-card">
+            <img
+              src="assets/images/hero-3.png"
+              alt="Managing wealth from a first-class cabin"
+              class="w-full h-64 sm:h-72 md:h-80 object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-5 md:p-7">
+              <h3 class="text-white text-xl md:text-2xl font-bold mb-2">
+                Ask Anything
+              </h3>
+              <p class="text-white/70 text-sm md:text-base leading-relaxed">
+                AI that knows your entire financial picture.
+                Chat or voice, any question.
+              </p>
+            </div>
+          </div>
+
+          <!-- Card 3: Connect Everyone — hero-2.png -->
+          <div class="photo-card">
+            <img
+              src="assets/images/hero-2.png"
+              alt="Business meeting in London — advisors collaborating"
+              class="w-full h-64 sm:h-72 md:h-80 object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 p-5 md:p-7">
+              <h3 class="text-white text-xl md:text-2xl font-bold mb-2">
+                Connect Everyone
+              </h3>
+              <p class="text-white/70 text-sm md:text-base leading-relaxed">
+                Your advisors plug into YOUR system.
+                Scoped access, full audit trail.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         ACT 4: THE DIFFERENCE
+         No trading. No advice. No conflicts.
+         ======================================== -->
+    <section class="bg-kyw-bg border-t border-b border-kyw-border fade-up" style="padding-top:4rem; padding-bottom:4rem;">
+      <div class="page-container-narrow text-center" style="padding-top:1rem; padding-bottom:1rem;">
+
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight mb-5 md:mb-6">
+          No trading. No advice.<br />No conflicts.
+        </h2>
+
+        <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed max-w-xl mx-auto mb-5">
+          We charge a monthly fee. We don't trade your money. We don't give advice.
+          We don't earn commissions. We don't manage your assets. We just build
+          great software that puts you in control.
+        </p>
+
+        <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed max-w-xl mx-auto">
+          Think of it like this: you wouldn't let your accountant also be your
+          stockbroker. So why let the people who manage your wealth also be the
+          ones who report on it? We separated the two. That's the whole idea.
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         ACT 5: THE FOUNDER
+         hero-7.png as subtle background.
+         Warm, personal, credible.
+         ======================================== -->
+    <section class="founder-bg bg-kyw-bg fade-up" style="padding-top:5rem; padding-bottom:5rem;">
+      <div class="relative z-10 page-container-narrow">
+        <div class="max-w-xl mx-auto text-center">
+
+          <blockquote class="text-lg md:text-xl lg:text-2xl text-kyw-text leading-relaxed mb-8 md:mb-10" style="font-style:normal;">
+            &ldquo;I sold my business to L'Or&eacute;al and suddenly had a dozen
+            people &lsquo;managing&rsquo; my wealth. None of them talked to each
+            other. So I built the system I wished existed.
+            I'm its first user.&rdquo;
+          </blockquote>
+
+          <!-- Signature block -->
+          <div class="flex flex-col items-center gap-2">
+            <p class="text-4xl md:text-5xl text-kyw-text font-signature">
+              Elliot
+            </p>
+            <div class="w-12 h-px bg-kyw-border my-1"></div>
+            <p class="text-sm font-semibold text-kyw-text">
+              Elliot Isaacs
+            </p>
+            <p class="text-xs text-kyw-text-muted tracking-wide">
+              Founder
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         ACT 6: THE CLOSE
+         Full-width, dramatic final CTA.
+         ======================================== -->
+    <section id="start" class="final-cta-bg fade-up" style="padding-top:5rem; padding-bottom:5rem;">
+      <div class="page-container">
+        <div class="max-w-2xl mx-auto text-center">
+
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight mb-5 md:mb-6">
+            Your money. Your system.<br />Your rules.
+          </h2>
+
+          <a
+            href="#"
+            class="btn-primary inline-block text-center glow-btn text-base md:text-lg !py-3.5 !px-10 mb-5 md:mb-6"
+          >
+            Start Free Trial
+          </a>
+
+          <p class="text-sm text-kyw-text-muted">
+            Sign up in minutes. No contracts. Cancel anytime.
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ========================================
+       FOOTER
+       ======================================== -->
+  <footer class="border-t border-kyw-border bg-kyw-bg">
+    <div class="page-container py-6 md:py-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <!-- Left: logo + copyright -->
+        <div class="flex items-center gap-3">
+          <span class="text-sm font-bold text-white tracking-tight">
+            KNOW YOUR WORTH
+          </span>
+          <span class="text-kyw-border">|</span>
+          <span class="text-xs text-kyw-text-muted">
+            &copy; 2026 Know Your Worth Ltd
+          </span>
+        </div>
+        <!-- Right: compact links -->
+        <div class="flex items-center gap-5 text-xs text-kyw-text-muted">
+          <a href="#" class="hover:text-kyw-text transition-colors" style="text-decoration:none;">
+            Product
+          </a>
+          <a href="#" class="hover:text-kyw-text transition-colors" style="text-decoration:none;">
+            Security
+          </a>
+          <a href="#" class="hover:text-kyw-text transition-colors" style="text-decoration:none;">
+            Privacy
+          </a>
+          <a href="#" class="hover:text-kyw-text transition-colors" style="text-decoration:none;">
+            Terms
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ========================================
+       SCROLL FADE-IN OBSERVER
+       ======================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      document.querySelectorAll('.fade-up').forEach((el) => {
+        observer.observe(el);
+      });
+    });
+  </script>
+
+
+</body>
+</html>

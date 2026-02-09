@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Know Your Worth - Stop paying people to explain things to each other.">
+  <meta name="theme-color" content="#0f1117">
+  <title>Know Your Worth &mdash; V12 The Anti-Advisor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Alex+Brush&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <style>
+    /* ── V12 Anti-Advisor overrides ── */
+
+    /* Comparison columns */
+    .compare-card {
+      border-radius: 16px;
+      padding: 32px 28px;
+      flex: 1;
+    }
+    .compare-card--old {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.06) 0%, rgba(26, 29, 41, 0.9) 100%);
+      border: 1px solid rgba(239, 68, 68, 0.15);
+    }
+    .compare-card--new {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(26, 29, 41, 0.9) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+    }
+
+    .compare-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(45, 49, 66, 0.5);
+    }
+    .compare-item:last-child {
+      border-bottom: none;
+    }
+    .compare-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .compare-icon--red {
+      background: rgba(239, 68, 68, 0.12);
+      color: #ef4444;
+    }
+    .compare-icon--green {
+      background: rgba(16, 185, 129, 0.12);
+      color: #10b981;
+    }
+
+    /* Photo pillar cards */
+    .pillar-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      min-height: 380px;
+      display: flex;
+      align-items: flex-end;
+    }
+    @media (min-width: 768px) {
+      .pillar-card { min-height: 440px; }
+    }
+    .pillar-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .pillar-card:hover img {
+      transform: scale(1.04);
+    }
+    .pillar-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0.15) 100%);
+    }
+    .pillar-content {
+      position: relative;
+      z-index: 2;
+      padding: 32px 28px;
+    }
+    @media (min-width: 768px) {
+      .pillar-content { padding: 40px 36px; }
+    }
+
+    /* Glow CTA */
+    .glow-cta {
+      box-shadow:
+        0 0 24px rgba(96, 77, 228, 0.3),
+        0 0 80px rgba(96, 77, 228, 0.1);
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+    }
+    .glow-cta:hover {
+      box-shadow:
+        0 0 36px rgba(96, 77, 228, 0.45),
+        0 0 100px rgba(96, 77, 228, 0.15);
+      transform: translateY(-1px);
+    }
+
+    /* Pricing divider line */
+    .pricing-line {
+      width: 64px;
+      height: 3px;
+      background: linear-gradient(90deg, #604de4, #4c6ef5);
+      border-radius: 2px;
+      margin: 0 auto 24px;
+    }
+
+    /* Subtle badge */
+    .badge-disruptor {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(96, 77, 228, 0.3);
+      background: rgba(96, 77, 228, 0.08);
+      font-size: 13px;
+      font-weight: 600;
+      color: #7c6ef0;
+      letter-spacing: 0.02em;
+    }
+
+    /* Founder blockquote */
+    .founder-quote {
+      position: relative;
+      padding-left: 24px;
+    }
+    .founder-quote::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, #604de4, transparent);
+      border-radius: 2px;
+    }
+
+    /* Hero photo overlay */
+    .hero-photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 17, 23, 0.88) 0%,
+        rgba(15, 17, 23, 0.82) 40%,
+        rgba(15, 17, 23, 0.92) 100%
+      );
+    }
+
+    /* Dashboard image frame */
+    .dash-frame {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid #2d3142;
+      box-shadow:
+        0 4px 60px rgba(96, 77, 228, 0.10),
+        0 0 120px rgba(96, 77, 228, 0.05);
+    }
+
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================
+       STICKY NAV
+       ======================================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-kyw-bg/80 backdrop-blur-xl border-b border-kyw-border/50">
+    <nav class="page-container">
+      <div class="flex items-center justify-between py-3 md:py-4">
+        <!-- Logo -->
+        <a href="index.html" class="flex items-center gap-2.5">
+          <img src="assets/images/kyw-logo.png" alt="KYW" class="h-7 md:h-8" />
+          <span class="text-sm md:text-base font-bold text-kyw-text tracking-tight hidden sm:inline">Know Your Worth</span>
+        </a>
+        <!-- CTA -->
+        <a href="#start" class="btn-primary text-sm !py-2 !px-5 md:!py-2.5 md:!px-6 glow-cta">Get Started</a>
+      </div>
+    </nav>
+  </header>
+
+
+  <main>
+
+    <!-- ========================================
+         HERO — THE PROVOCATION
+         ======================================== -->
+    <section class="relative overflow-hidden bg-kyw-bg min-h-[90vh] flex items-center">
+      <!-- Background photo -->
+      <img
+        src="assets/images/hero-5.png"
+        alt="Family before mountains"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+      <!-- Dark overlay — text must dominate -->
+      <div class="hero-photo-overlay"></div>
+
+      <!-- Subtle grid pattern -->
+      <div class="absolute inset-0 opacity-[0.015]" style="background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px); background-size: 64px 64px;"></div>
+
+      <div class="relative z-10 w-full pt-28 md:pt-36 pb-16 md:pb-24">
+        <div class="page-container">
+          <div class="max-w-3xl mx-auto text-center">
+
+            <!-- Disruptor badge -->
+            <div class="mb-6 md:mb-8">
+              <span class="badge-disruptor">The wealth management disruptor</span>
+            </div>
+
+            <!-- Headline -->
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-white leading-[1.06] tracking-tight mb-5 md:mb-7">
+              Stop paying people to explain things to each other.
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-lg md:text-xl lg:text-2xl text-kyw-text-secondary leading-relaxed max-w-2xl mx-auto mb-8 md:mb-10">
+              Your advisor charges 1%. Your accountant bills by the hour. Your lawyer doesn't talk to either.
+              <span class="text-white font-semibold">KYW replaces the whole model.</span> One platform. One monthly fee. Total control.
+            </p>
+
+            <!-- CTAs -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10 md:mb-12">
+              <a href="#start" class="btn-primary text-base md:text-lg !py-3.5 !px-8 md:!py-4 md:!px-10 glow-cta w-full sm:w-auto text-center">
+                Start Free Trial
+              </a>
+              <a href="#compare" class="btn-ghost text-base !py-3.5 !px-8 w-full sm:w-auto text-center" style="border:1px solid #2d3142; border-radius:10px; color:#9ca3af; text-decoration:none; transition:all 0.2s;">
+                See how it works
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         THE OLD WAY vs THE KYW WAY
+         ======================================== -->
+    <section id="compare" class="section bg-kyw-bg">
+      <div class="page-container">
+        <div class="max-w-4xl mx-auto">
+
+          <div class="text-center mb-10 md:mb-14">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight mb-4">
+              You already know the problem.
+            </h2>
+            <p class="text-lg text-kyw-text-secondary max-w-2xl mx-auto">
+              Your wealth is scattered across advisors, accounts, entities, and currencies. Nobody has the full picture. Least of all you.
+            </p>
+          </div>
+
+          <!-- Comparison columns -->
+          <div class="flex flex-col md:flex-row gap-4 md:gap-6">
+
+            <!-- OLD WAY -->
+            <div class="compare-card compare-card--old">
+              <h3 class="text-lg md:text-xl font-bold mb-1" style="color: #ef4444;">The Old Way</h3>
+              <p class="text-sm text-kyw-text-muted mb-5">What you're paying for now</p>
+
+              <div class="compare-item">
+                <div class="compare-icon compare-icon--red">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-kyw-text">Advisor: 1% of AUM annually</p>
+                  <p class="text-xs text-kyw-text-muted mt-0.5">On a &pound;10M portfolio, that's &pound;100K/year for quarterly PDFs</p>
+                </div>
+              </div>
+
+              <div class="compare-item">
+                <div class="compare-icon compare-icon--red">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-kyw-text">Accountant: &pound;500/hour</p>
+                  <p class="text-xs text-kyw-text-muted mt-0.5">Quarterly reports that arrive three months late</p>
+                </div>
+              </div>
+
+              <div class="compare-item">
+                <div class="compare-icon compare-icon--red">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-kyw-text">Lawyer: Siloed entirely</p>
+                  <p class="text-xs text-kyw-text-muted mt-0.5">Doesn't talk to your accountant. Bills you for everything.</p>
+                </div>
+              </div>
+
+              <div class="compare-item">
+                <div class="compare-icon compare-icon--red">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-kyw-text">Bank: Their system, their timeline</p>
+                  <p class="text-xs text-kyw-text-muted mt-0.5">You log into their portal. You read their reports. On their schedule.</p>
+                </div>
+              </div>
+
+              <div class="compare-item">
+                <div class="compare-icon compare-icon--red">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-kyw-text">You: Drowning in PDFs</p>
+                  <p class="text-xs text-kyw-text-muted mt-0.5">No single view of your wealth. No real control. Just invoices.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- KYW WAY -->
+            <div class="compare-card compare-card--new">
+              <h3 class="text-lg md:text-xl font-bold mb-1" style="color: #10b981;">The KYW Way</h3>
+              <p class="text-sm text-kyw-text-muted mb-5">What it should look like</p>
+
+              <div class="compare-item">
+                <div class="compare-icon compare-icon--green">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-kyw-text">Software: Fixed monthly fee</p>
+                  <p class="text-xs text-kyw-text-muted mt-0.5">No commissions. No percentage of assets. Just a subscription.</p>
+                </div>
+              </div>
+
+              <div class="compare-item">
+                <div class="compare-icon compare-icon--green">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-kyw-text">Real-time: Everything, live</p>
+                  <p class="text-xs text-kyw-text-muted mt-0.5">Every transaction, every account, updated automatically</p>
+                </div>
+              </div>
+
+              <div class="compare-item">
+                <div class="compare-icon compare-icon--green">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-kyw-text">Connected: Everyone in YOUR system</p>
+                  <p class="text-xs text-kyw-text-muted mt-0.5">Your advisors plug into your platform. Not the other way round.</p>
+                </div>
+              </div>
+
+              <div class="compare-item">
+                <div class="compare-icon compare-icon--green">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-kyw-text">AI: Ask anything, instantly</p>
+                  <p class="text-xs text-kyw-text-muted mt-0.5">"What's my USD exposure?" Answered in seconds, not weeks.</p>
+                </div>
+              </div>
+
+              <div class="compare-item">
+                <div class="compare-icon compare-icon--green">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold text-kyw-text">You: In control, for the first time</p>
+                  <p class="text-xs text-kyw-text-muted mt-0.5">One login. One truth. Your wealth, on your terms.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         PHOTO SECTION — "One platform. Everything."
+         ======================================== -->
+    <section class="section-sm bg-kyw-bg">
+      <div class="page-container">
+        <div class="max-w-5xl mx-auto">
+
+          <div class="text-center mb-8 md:mb-10">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight mb-4">
+              One platform. Everything.
+            </h2>
+            <p class="text-lg text-kyw-text-secondary max-w-xl mx-auto">
+              Sign up like Netflix. Connect your banks. See everything in one place.
+            </p>
+          </div>
+
+          <!-- Dashboard image -->
+          <div class="dash-frame">
+            <img
+              src="assets/images/hero-1.png"
+              alt="KYW Dashboard showing unified multi-asset portfolio view"
+              class="w-full block"
+            />
+          </div>
+
+          <!-- Stats bar under image -->
+          <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 mt-6 md:mt-8 text-sm md:text-base text-kyw-text-muted">
+            <div class="flex items-center gap-2">
+              <span class="font-mono font-bold text-white text-lg">10,000+</span>
+              <span>banks connected</span>
+            </div>
+            <span class="text-kyw-border hidden sm:inline">|</span>
+            <div class="flex items-center gap-2">
+              <span class="font-mono font-bold text-white text-lg">180+</span>
+              <span>currencies</span>
+            </div>
+            <span class="text-kyw-border hidden sm:inline">|</span>
+            <div class="flex items-center gap-2">
+              <span class="font-mono font-bold text-white text-lg">Every</span>
+              <span>asset class</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         THREE PILLARS — Stacked Photo Cards
+         ======================================== -->
+    <section class="section bg-kyw-bg">
+      <div class="page-container">
+
+        <div class="text-center mb-10 md:mb-14">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight mb-4">
+            What changes when you switch.
+          </h2>
+          <p class="text-lg text-kyw-text-secondary max-w-2xl mx-auto">
+            Three things your current setup can never give you.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-6xl mx-auto">
+
+          <!-- Pillar 1: See Everything -->
+          <div class="pillar-card">
+            <img
+              src="assets/images/hero-4.png"
+              alt="Two people reviewing dashboards showing portfolio analytics"
+            />
+            <div class="pillar-overlay"></div>
+            <div class="pillar-content">
+              <p class="text-kyw-primary text-sm font-bold uppercase tracking-wider mb-2">See Everything</p>
+              <h3 class="text-2xl md:text-3xl font-black text-white mb-3 leading-tight">
+                Every account. Every entity. One view.
+              </h3>
+              <p class="text-base text-white/70 leading-relaxed">
+                Real bookkeeping across all your holdings &mdash; not just summary reports. Trusts, SPVs, personal accounts, all currencies, all asset classes. One dashboard you actually trust.
+              </p>
+            </div>
+          </div>
+
+          <!-- Pillar 2: Ask Anything -->
+          <div class="pillar-card">
+            <img
+              src="assets/images/hero-3.png"
+              alt="First-class cabin with laptop showing AI wealth assistant"
+            />
+            <div class="pillar-overlay"></div>
+            <div class="pillar-content">
+              <p class="text-kyw-blue text-sm font-bold uppercase tracking-wider mb-2">Ask Anything</p>
+              <h3 class="text-2xl md:text-3xl font-black text-white mb-3 leading-tight">
+                AI that actually knows your wealth.
+              </h3>
+              <p class="text-base text-white/70 leading-relaxed">
+                Not a chatbot. Not a demo. AI trained on your actual financial data. "What's my total exposure to USD?" &mdash; answered instantly, sourced from real transactions.
+              </p>
+            </div>
+          </div>
+
+          <!-- Pillar 3: Connect Everyone -->
+          <div class="pillar-card">
+            <img
+              src="assets/images/hero-2.png"
+              alt="London office meeting with Gherkin in background"
+            />
+            <div class="pillar-overlay"></div>
+            <div class="pillar-content">
+              <p class="text-kyw-success text-sm font-bold uppercase tracking-wider mb-2">Connect Everyone</p>
+              <h3 class="text-2xl md:text-3xl font-black text-white mb-3 leading-tight">
+                Your team. Your system. Their access.
+              </h3>
+              <p class="text-base text-white/70 leading-relaxed">
+                Invite your accountant, lawyer, and advisor into your platform. Scoped access. Full audit trail. They work in your system now, not the other way round.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         PRICING SIMPLICITY
+         ======================================== -->
+    <section class="section bg-kyw-surface/30 border-t border-b border-kyw-border">
+      <div class="page-container">
+        <div class="max-w-3xl mx-auto text-center">
+
+          <div class="pricing-line"></div>
+
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight mb-5">
+            Simple pricing. No conflicts.
+          </h2>
+
+          <p class="text-lg md:text-xl text-kyw-text-secondary leading-relaxed mb-6">
+            We charge a monthly software fee. That's it.
+          </p>
+
+          <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed max-w-2xl mx-auto mb-8">
+            We don't trade. We don't advise. We don't earn commissions. We don't take a percentage of your wealth. We build software and charge you a fair price for it &mdash; like every other SaaS product you use.
+          </p>
+
+          <p class="text-lg text-kyw-text leading-relaxed max-w-xl mx-auto mb-10">
+            Your advisor might not love that. <span class="text-white font-semibold">But you will.</span>
+          </p>
+
+          <!-- Pricing comparison -->
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-6 md:gap-10 text-sm text-kyw-text-secondary">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-kyw-error flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+              <span><s>1% of assets under management</s></span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-kyw-error flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+              <span><s>Performance fees</s></span>
+            </div>
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-kyw-error flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+              <span><s>Trading commissions</s></span>
+            </div>
+          </div>
+
+          <div class="mt-6 flex items-center justify-center gap-3">
+            <svg class="w-5 h-5 text-kyw-success flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+            <span class="text-lg text-white font-semibold">Fixed monthly subscription. Cancel anytime.</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         FOUNDER
+         ======================================== -->
+    <section class="section bg-kyw-bg">
+      <div class="page-container">
+        <div class="max-w-3xl mx-auto">
+
+          <div class="flex flex-col md:flex-row items-start gap-8 md:gap-12">
+
+            <!-- Photo pillar as accent -->
+            <div class="hidden md:block flex-shrink-0 w-48 lg:w-56">
+              <div class="rounded-2xl overflow-hidden border border-kyw-border">
+                <img
+                  src="assets/images/hero-7.png"
+                  alt="Family lifestyle"
+                  class="w-full h-64 lg:h-72 object-cover"
+                />
+              </div>
+            </div>
+
+            <!-- Quote content -->
+            <div class="flex-1">
+              <p class="text-sm font-bold uppercase tracking-wider text-kyw-primary mb-5">From the founder</p>
+
+              <div class="founder-quote mb-8">
+                <p class="text-xl md:text-2xl text-kyw-text leading-relaxed mb-4">
+                  I sold a consumer business to L'Or&eacute;al. Suddenly I had real wealth and a dozen people &ldquo;managing&rdquo; it.
+                </p>
+                <p class="text-xl md:text-2xl text-kyw-text leading-relaxed mb-4">
+                  None of them talked to each other. My accountant didn't know what my advisor was doing. My lawyer billed me to find out. Every quarter I got a stack of PDFs that didn't agree.
+                </p>
+                <p class="text-xl md:text-2xl text-white font-semibold leading-relaxed">
+                  So I built the system I wished existed.
+                </p>
+              </div>
+
+              <div class="flex items-center gap-4">
+                <p class="text-4xl md:text-5xl text-kyw-text" style="font-family: 'Alex Brush', cursive;">Elliot</p>
+                <div class="h-8 w-px bg-kyw-border"></div>
+                <div>
+                  <p class="text-base font-semibold text-kyw-text">Elliot Isaacs</p>
+                  <p class="text-sm text-kyw-text-muted">Founder</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         FINAL CTA
+         ======================================== -->
+    <section id="start" class="section relative overflow-hidden">
+      <!-- Gradient background -->
+      <div class="absolute inset-0 bg-kyw-bg">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-kyw-primary/10 rounded-full blur-[150px]"></div>
+      </div>
+      <!-- Grid pattern -->
+      <div class="absolute inset-0 opacity-[0.02]" style="background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px); background-size: 64px 64px;"></div>
+
+      <div class="relative z-10 page-container">
+        <div class="max-w-2xl mx-auto text-center">
+
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight mb-5 leading-tight">
+            Ready to stop being a client in everyone else's system?
+          </h2>
+
+          <p class="text-lg md:text-xl text-kyw-text-secondary leading-relaxed mb-8 md:mb-10 max-w-xl mx-auto">
+            Sign up in two minutes. Connect your accounts. See your entire wealth in one place for the first time.
+          </p>
+
+          <a href="#" class="btn-primary inline-block text-center text-lg !py-4 !px-10 md:!py-5 md:!px-14 glow-cta">
+            Start Free Trial
+          </a>
+
+          <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-8 text-sm text-kyw-text-muted">
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-kyw-success" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+              No credit card required
+            </span>
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-kyw-success" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+              2-minute setup
+            </span>
+            <span class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-kyw-success" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+              Cancel anytime
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ========================================
+       COMPACT FOOTER
+       ======================================== -->
+  <footer class="border-t border-kyw-border bg-kyw-bg">
+    <div class="page-container py-6 md:py-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="flex items-center gap-2">
+            <img src="assets/images/kyw-logo.png" alt="KYW" class="h-5" />
+            <span class="text-xs font-bold text-kyw-text">Know Your Worth</span>
+          </a>
+          <span class="text-kyw-border">|</span>
+          <span class="text-xs text-kyw-text-muted">&copy; 2026 Know Your Worth Ltd</span>
+        </div>
+        <div class="flex items-center gap-4 text-xs text-kyw-text-secondary">
+          <a href="#" class="hover:text-kyw-text transition-colors">Privacy</a>
+          <a href="#" class="hover:text-kyw-text transition-colors">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
