@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "tailwindcss -i ./src/css/globals.css -o ./assets/css/main.css --watch",
     "build": "tailwindcss -i ./src/css/globals.css -o ./assets/css/main.css --minify",
-    "encrypt": "npx staticrypt src/pages/index.html src/pages/big-idea.html src/pages/investors.html src/pages/v1.html src/pages/v2.html src/pages/v3.html src/pages/v4.html src/pages/v5.html src/pages/v6.html src/pages/v7.html src/pages/v8.html src/pages/v9.html src/pages/v10.html src/pages/v11.html src/pages/v12.html src/pages/v13.html src/pages/v14.html src/pages/v15.html src/pages/v16.html src/pages/v17.html src/pages/v18.html -p partners-counts-string-walls --short -d . --template-title \"Know Your Worth - Beta\" --remember 30 -t password_template.html",
+    "encrypt": "npx staticrypt src/pages/index.html src/pages/big-idea.html src/pages/investors.html src/pages/v1.html src/pages/v2.html src/pages/v3.html src/pages/v4.html src/pages/v5.html src/pages/v6.html src/pages/v7.html src/pages/v8.html src/pages/v9.html src/pages/v10.html src/pages/v11.html src/pages/v12.html src/pages/v13.html src/pages/v14.html src/pages/v15.html src/pages/v16.html src/pages/v17.html src/pages/v18.html src/pages/v19.html -p partners-counts-string-walls --short -d . --template-title \"Know Your Worth - Beta\" --remember 30 -t password_template.html",
     "deploy": "npm run build && npm run encrypt"
   },
   "keywords": [
