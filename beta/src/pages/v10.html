@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Know Your Worth - A letter from our founder">
+  <meta name="theme-color" content="#0f1117">
+  <title>Know Your Worth — V10 Founder's Letter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Alex+Brush&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <style>
+    /* =============================================
+       V10 — FOUNDER'S LETTER OVERRIDES
+       ============================================= */
+
+    /* Serif font for pull-out quotes */
+    .font-serif {
+      font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+    }
+
+    /* Signature font */
+    .font-signature {
+      font-family: 'Alex Brush', cursive;
+    }
+
+    /* Narrow reading column */
+    .page-container-narrow {
+      max-width: 42rem; /* ~672px — comfortable reading width */
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .page-container-narrow {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
+
+    /* Full-bleed images that break out of the narrow column */
+    .image-breakout {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+
+    /* Smooth prose paragraph spacing */
+    .prose-letter p {
+      margin-bottom: 1.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .prose-letter p {
+        margin-bottom: 2rem;
+      }
+    }
+
+    .prose-letter p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Purple emphasis mark */
+    .text-emphasis {
+      background: transparent;
+      color: #604de4;
+      font-weight: 600;
+    }
+
+    /* Ghost button for CTA */
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.875rem 3rem;
+      border: 1px solid rgba(96, 77, 228, 0.4);
+      border-radius: 0.5rem;
+      color: #604de4;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(96, 77, 228, 0.08);
+      border-color: #604de4;
+      color: #e4e6eb;
+    }
+
+    /* Thin horizontal rule */
+    .letter-divider {
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #2d3142, transparent);
+      margin: 3rem 0;
+    }
+
+    @media (min-width: 768px) {
+      .letter-divider {
+        margin: 4rem 0;
+      }
+    }
+
+    /* Fade-in on scroll */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Image overlay gradient — bottom */
+    .img-gradient-bottom::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(to top, #0f1117, transparent);
+      pointer-events: none;
+    }
+
+    /* Image overlay gradient — top */
+    .img-gradient-top::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(to bottom, #0f1117, transparent);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Drop cap for the opening paragraph */
+    .drop-cap::first-letter {
+      float: left;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 4rem;
+      line-height: 0.75;
+      padding-right: 0.5rem;
+      padding-top: 0.25rem;
+      color: #604de4;
+      font-weight: 700;
+    }
+
+    @media (min-width: 768px) {
+      .drop-cap::first-letter {
+        font-size: 5rem;
+      }
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Remove body margin for full-bleed images */
+    body {
+      overflow-x: hidden;
+    }
+  </style>
+</head>
+
+<body class="bg-kyw-bg text-kyw-text antialiased">
+
+
+  <!-- ========================================
+       MINIMAL HEADER
+       ======================================== -->
+  <header class="pt-8 md:pt-12 pb-4 md:pb-6">
+    <div class="text-center">
+      <a href="index.html" class="inline-block">
+        <span class="text-sm md:text-base font-semibold text-kyw-text-secondary tracking-[0.2em] uppercase">Know Your Worth</span>
+      </a>
+    </div>
+  </header>
+
+
+  <main>
+
+    <!-- ========================================
+         OPENING IMAGE — First Class Cabin
+         ======================================== -->
+    <div class="image-breakout relative img-gradient-bottom img-gradient-top mt-4 md:mt-6">
+      <img
+        src="assets/images/hero-3.png"
+        alt="The view from first class — because you've earned the right to see everything clearly"
+        class="w-full h-[40vh] md:h-[50vh] object-cover"
+      />
+    </div>
+
+
+    <!-- ========================================
+         THE LETTER — Opening
+         ======================================== -->
+    <article class="page-container-narrow">
+
+      <!-- Salutation -->
+      <div class="pt-12 md:pt-20 pb-2 fade-up">
+        <p class="font-serif italic text-2xl md:text-3xl text-white leading-snug">
+          Dear future member,
+        </p>
+      </div>
+
+      <hr class="letter-divider" />
+
+      <!-- The Problem -->
+      <div class="prose-letter fade-up">
+        <p class="text-kyw-text/90 text-lg md:text-xl leading-relaxed drop-cap">
+          I sold my consumer business to L'Or&eacute;al. Suddenly I had real wealth &mdash; and absolutely
+          <mark class="text-emphasis">no way to manage it</mark>.
+        </p>
+
+        <p class="text-kyw-text/90 text-lg md:text-xl leading-relaxed">
+          My bank gave me a relationship manager who changed every eighteen months. My accountant
+          sent quarterly reports three months late. My lawyer's firm charged by the hour to explain
+          what my accountant had already explained. My tax advisor needed information that lived in
+          my broker's system, which didn't talk to my bank's system, which had no idea about my
+          property portfolio.
+        </p>
+
+        <p class="text-kyw-text/90 text-lg md:text-xl leading-relaxed">
+          Every advisor had a piece of the puzzle. Nobody had the picture.
+        </p>
+      </div>
+
+      <!-- Pull-out quote -->
+      <div class="py-8 md:py-12 fade-up">
+        <p class="font-serif italic text-2xl md:text-3xl lg:text-4xl text-white leading-snug">
+          I wasn't looking for advice.<br />
+          I was looking for <mark class="text-emphasis">a system</mark>.
+        </p>
+      </div>
+
+    </article>
+
+
+    <!-- ========================================
+         IMAGE BREAK — Dashboard
+         ======================================== -->
+    <div class="image-breakout relative img-gradient-bottom img-gradient-top fade-up">
+      <img
+        src="assets/images/hero-1.png"
+        alt="KYW Platform — Multi-dashboard wealth management interface showing consolidated positions"
+        class="w-full h-[35vh] md:h-[45vh] object-cover"
+      />
+    </div>
+
+
+    <!-- ========================================
+         THE LETTER — The Solution
+         ======================================== -->
+    <article class="page-container-narrow">
+
+      <div class="pt-12 md:pt-20 prose-letter fade-up">
+        <p class="font-serif italic text-2xl md:text-3xl text-white leading-snug mb-8 md:mb-10">
+          So I built one.
+        </p>
+
+        <p class="text-kyw-text/90 text-lg md:text-xl leading-relaxed">
+          Know Your Worth is the <mark class="text-emphasis">operating system I wished existed</mark>.
+          Sign up like Netflix. Connect your banks &mdash; all 10,000+ of them. See everything:
+          every entity, every currency, every asset class. Not just reports.
+          Real bookkeeping. Real workflows. Real control.
+        </p>
+
+        <p class="text-kyw-text/90 text-lg md:text-xl leading-relaxed">
+          The architecture is built from transactions up, not dashboards down. Every
+          entry is double-booked. Every position is reconciled. It's the same rigour
+          that powers institutional systems, packaged so a single individual &mdash; or a family &mdash;
+          can use it without a team of analysts.
+        </p>
+
+        <p class="text-kyw-text/90 text-lg md:text-xl leading-relaxed">
+          Then I added an AI that actually understands your financial picture. Ask it anything,
+          in English, by chat or voice. <mark class="text-emphasis">"What's my USD exposure?"</mark>
+          "Show me my rental income vs expenses." "When's my next capital call?"
+          Instant, contextual answers from <em>your</em> data &mdash; not generic advice scraped from the internet.
+        </p>
+      </div>
+
+      <!-- Pull-out quote -->
+      <div class="py-8 md:py-12 fade-up">
+        <p class="font-serif italic text-2xl md:text-3xl lg:text-4xl text-white leading-snug">
+          Not a simplified consumer app.<br />
+          Not an institutional terminal.<br />
+          <mark class="text-emphasis">The right level of depth</mark> for people who
+          want to understand their wealth.
+        </p>
+      </div>
+
+    </article>
+
+
+    <!-- ========================================
+         IMAGE BREAK — Family Mountains
+         ======================================== -->
+    <div class="image-breakout relative img-gradient-bottom img-gradient-top fade-up">
+      <img
+        src="assets/images/hero-5.png"
+        alt="A family looking out over mountains — the long view that wealth management should provide"
+        class="w-full h-[35vh] md:h-[45vh] object-cover"
+      />
+    </div>
+
+
+    <!-- ========================================
+         THE LETTER — The Promise
+         ======================================== -->
+    <article class="page-container-narrow">
+
+      <div class="pt-12 md:pt-20 prose-letter fade-up">
+        <p class="font-serif italic text-2xl md:text-3xl text-white leading-snug mb-8 md:mb-10">
+          Here's what we will never do.
+        </p>
+
+        <p class="text-kyw-text/90 text-lg md:text-xl leading-relaxed">
+          We will <mark class="text-emphasis">never trade your assets</mark>. We will never give
+          investment advice. We will never earn commissions on your decisions. We will never
+          sell your data. There are no conflicts of interest. You pay a software fee. That's it.
+        </p>
+
+        <p class="text-kyw-text/90 text-lg md:text-xl leading-relaxed">
+          Your existing advisors &mdash; your accountant, your lawyer, your wealth manager &mdash; they
+          don't get replaced. They get upgraded. They connect to <em>your</em> system, see <em>your</em>
+          data in real-time, and collaborate within a single source of truth. You stop being the
+          messenger between professionals who should already be talking to each other.
+        </p>
+
+        <p class="text-kyw-text/90 text-lg md:text-xl leading-relaxed">
+          Your data is yours. Every access is logged. Every employee faces financial penalties
+          for violations. We built the kind of privacy <mark class="text-emphasis">we'd want for
+          our own family</mark>.
+        </p>
+      </div>
+
+      <hr class="letter-divider" />
+
+    </article>
+
+
+    <!-- ========================================
+         IMAGE BREAK — Family Picnic
+         ======================================== -->
+    <div class="image-breakout relative img-gradient-bottom img-gradient-top fade-up">
+      <img
+        src="assets/images/hero-7.png"
+        alt="A family picnic — because wealth exists to serve life, not the other way around"
+        class="w-full h-[35vh] md:h-[45vh] object-cover"
+      />
+    </div>
+
+
+    <!-- ========================================
+         THE LETTER — The Invitation
+         ======================================== -->
+    <article class="page-container-narrow">
+
+      <div class="pt-12 md:pt-20 prose-letter fade-up">
+        <p class="text-kyw-text/90 text-lg md:text-xl leading-relaxed">
+          I spent years in boardrooms and deal rooms. I've sat across the table from
+          acquirers, auditors, and private bankers. And the one thing I kept coming back
+          to was this: the people who manage the most complex personal balance sheets in
+          the world have the worst tools to do it.
+        </p>
+
+        <p class="text-kyw-text/90 text-lg md:text-xl leading-relaxed">
+          Spreadsheets. PDFs. Emails with attachments. Phone calls to ask for numbers that
+          should already be on a screen.
+        </p>
+
+        <p class="text-kyw-text/90 text-lg md:text-xl leading-relaxed">
+          That era is over.
+        </p>
+      </div>
+
+      <!-- Pull-out quote -->
+      <div class="py-8 md:py-12 fade-up">
+        <p class="font-serif italic text-2xl md:text-3xl lg:text-4xl text-white leading-snug">
+          I'm the first user of Know Your Worth.<br />
+          I use it every day to manage my own wealth.<br />
+          <mark class="text-emphasis">My family's future depends on this software working.</mark>
+        </p>
+      </div>
+
+      <div class="prose-letter fade-up">
+        <p class="text-kyw-text/90 text-lg md:text-xl leading-relaxed">
+          I'd love for you to try it.
+        </p>
+      </div>
+
+      <hr class="letter-divider" />
+
+
+      <!-- ========================================
+           SIGNATURE
+           ======================================== -->
+      <div class="pb-6 md:pb-8 fade-up">
+        <p class="font-signature text-6xl md:text-7xl text-kyw-text leading-none">
+          Elliot
+        </p>
+        <div class="mt-3">
+          <p class="text-kyw-text font-semibold text-sm">Elliot Isaacs</p>
+          <p class="text-kyw-text-muted text-sm">Founder</p>
+        </div>
+      </div>
+
+
+      <hr class="letter-divider" />
+
+
+      <!-- ========================================
+           SINGLE CTA
+           ======================================== -->
+      <div class="py-12 md:py-20 text-center fade-up">
+        <a href="#" class="btn-ghost">
+          Begin
+        </a>
+      </div>
+
+    </article>
+
+  </main>
+
+
+  <!-- ========================================
+       MINIMAL FOOTER
+       ======================================== -->
+  <footer class="pb-10 md:pb-14">
+    <div class="text-center">
+      <p class="text-xs text-kyw-text-muted">&copy; 2026 Know Your Worth Ltd.</p>
+    </div>
+  </footer>
+
+
+  <!-- ========================================
+       SCROLL REVEAL SCRIPT
+       ======================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const fadeElements = document.querySelectorAll('.fade-up');
+
+      // If IntersectionObserver is not supported, show everything
+      if (!('IntersectionObserver' in window)) {
+        fadeElements.forEach(function (el) {
+          el.classList.add('visible');
+        });
+        return;
+      }
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      fadeElements.forEach(function (el) {
+        observer.observe(el);
+      });
+    });
+  </script>
+
+</body>
+</html>

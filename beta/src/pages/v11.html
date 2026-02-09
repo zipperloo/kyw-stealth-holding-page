@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Know Your Worth - The operating system for personal wealth">
+  <meta name="theme-color" content="#0f1117">
+  <title>Know Your Worth &mdash; V11 Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Alex+Brush&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <style>
+    /* ── V11 Dashboard-specific overrides ── */
+
+    /* Grid background pattern */
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* Terminal caret blink */
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .cursor-blink {
+      animation: blink 1s step-end infinite;
+    }
+
+    /* Glow ring for CTA */
+    .glow-btn {
+      box-shadow:
+        0 0 20px rgba(96, 77, 228, 0.3),
+        0 0 60px rgba(96, 77, 228, 0.1);
+      transition: box-shadow 0.3s ease;
+    }
+    .glow-btn:hover {
+      box-shadow:
+        0 0 30px rgba(96, 77, 228, 0.45),
+        0 0 80px rgba(96, 77, 228, 0.15);
+    }
+
+    /* Browser chrome frame */
+    .browser-frame {
+      border: 1px solid #2d3142;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #1a1d29;
+    }
+    .browser-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: #12141e;
+      border-bottom: 1px solid #2d3142;
+    }
+    .browser-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .browser-dot--red { background: #ff5f57; }
+    .browser-dot--yellow { background: #febc2e; }
+    .browser-dot--green { background: #28c840; }
+    .browser-url {
+      flex: 1;
+      margin-left: 8px;
+      padding: 4px 12px;
+      border-radius: 4px;
+      background: #0f1117;
+      border: 1px solid #2d3142;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 11px;
+      color: #6b7280;
+    }
+
+    /* Subtle glow around browser frame */
+    .frame-glow {
+      box-shadow:
+        0 4px 60px rgba(96, 77, 228, 0.12),
+        0 0 120px rgba(96, 77, 228, 0.06);
+    }
+
+    /* Pipeline connector */
+    .pipeline-arrow {
+      color: #2d3142;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    /* Mini progress bar */
+    .progress-track {
+      height: 6px;
+      background: #2d3142;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: #604de4;
+    }
+
+    /* Status row */
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 0;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 12px;
+    }
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* Terminal block */
+    .terminal-block {
+      background: #0f1117;
+      border: 1px solid #2d3142;
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* Mono label like // comment */
+    .mono-label {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 11px;
+      color: #604de4;
+      letter-spacing: 0.04em;
+    }
+
+    /* Comparison card */
+    .compare-col {
+      flex: 1;
+      padding: 24px;
+    }
+
+    /* Pulse animation for status dot */
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    .dot-pulse {
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================
+       TERMINAL-STYLE NAV
+       ======================================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-kyw-surface border-b border-kyw-border">
+    <nav class="page-container">
+      <div class="flex items-center justify-between py-2.5 md:py-3">
+        <!-- Left: Logo + status -->
+        <div class="flex items-center gap-3">
+          <a href="index.html" class="flex items-center gap-2">
+            <span style="font-family:'Courier New',Courier,monospace; font-size:15px; font-weight:700; color:#e4e6eb; letter-spacing:0.02em;">&gt; KYW</span>
+          </a>
+          <span class="hidden sm:flex items-center gap-1.5 text-xs text-kyw-text-muted" style="font-family:'Courier New',Courier,monospace;">
+            <span class="status-dot bg-kyw-success dot-pulse" style="width:6px;height:6px;"></span>
+            operational
+          </span>
+        </div>
+        <!-- Right: version + CTA -->
+        <div class="flex items-center gap-3 md:gap-4">
+          <span class="hidden sm:inline text-xs text-kyw-text-muted border border-kyw-border rounded px-2 py-0.5" style="font-family:'Courier New',Courier,monospace;">v2.4.1</span>
+          <a href="#launch" class="btn-primary text-xs !py-1.5 !px-4 glow-btn">Launch App</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+  <main>
+
+    <!-- ========================================
+         HERO — DATA STATEMENT
+         ======================================== -->
+    <section class="relative overflow-hidden bg-kyw-bg grid-bg">
+      <!-- Gradient blobs -->
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-10 left-1/3 w-[350px] h-[350px] bg-kyw-primary/10 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-0 right-1/4 w-[250px] h-[250px] bg-kyw-blue/8 rounded-full blur-[100px]"></div>
+      </div>
+
+      <div class="relative z-10 pt-20 md:pt-28 pb-10 md:pb-14">
+        <div class="page-container">
+          <div class="max-w-3xl mx-auto text-center">
+
+            <!-- Mono prefix -->
+            <p class="mono-label mb-3 md:mb-4">// wealth_os</p>
+
+            <h1 class="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-[1.08] tracking-tight mb-5 md:mb-6">
+              The operating system<br />for personal wealth
+            </h1>
+
+            <!-- Inline stats row -->
+            <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 mb-7 md:mb-9 text-xs text-kyw-text-muted" style="font-family:'Courier New',Courier,monospace;">
+              <span class="text-kyw-text font-bold">10,000+&nbsp;banks</span>
+              <span class="text-kyw-border">&middot;</span>
+              <span class="text-kyw-text font-bold">180+&nbsp;currencies</span>
+              <span class="text-kyw-border">&middot;</span>
+              <span class="text-kyw-text font-bold">every&nbsp;asset&nbsp;class</span>
+              <span class="text-kyw-border">&middot;</span>
+              <span class="text-kyw-text font-bold">256-bit&nbsp;encrypted</span>
+            </div>
+
+            <!-- CTAs -->
+            <div class="flex items-center justify-center gap-3">
+              <a href="#launch" class="btn-primary glow-btn">Launch App</a>
+              <a href="#docs" class="btn-ghost text-sm" style="border:1px solid #2d3142; padding:10px 20px; border-radius:8px; color:#9ca3af; text-decoration:none; transition:all 0.2s;">Read Docs</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         LIVE DASHBOARD PREVIEW
+         ======================================== -->
+    <section class="section-sm bg-kyw-bg">
+      <div class="page-container">
+        <div class="max-w-5xl mx-auto">
+
+          <!-- Browser frame -->
+          <div class="browser-frame frame-glow">
+            <div class="browser-titlebar">
+              <span class="browser-dot browser-dot--red"></span>
+              <span class="browser-dot browser-dot--yellow"></span>
+              <span class="browser-dot browser-dot--green"></span>
+              <span class="browser-url">app.knowyourworth.com/dashboard</span>
+            </div>
+            <img
+              src="assets/images/hero-1.png"
+              alt="KYW Dashboard — multi-asset portfolio view with real-time analytics"
+              class="w-full block"
+              style="display:block;"
+            />
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         CAPABILITIES GRID — 6 Bento Cards
+         ======================================== -->
+    <section class="section-sm bg-kyw-bg grid-bg">
+      <div class="page-container">
+
+        <p class="mono-label mb-2">// capabilities</p>
+        <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight mb-6 md:mb-8">What the system does</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+
+          <!-- Card 1: Bookkeeping -->
+          <div class="card card-hover p-5 md:p-6" style="background:#1a1d29; border:1px solid #2d3142; border-radius:10px;">
+            <p class="mono-label mb-2">// bookkeeping</p>
+            <h3 class="text-base font-bold text-white mb-1.5">Full-Stack Transactions</h3>
+            <p class="text-xs text-kyw-text-secondary leading-relaxed mb-4">Every buy, sell, dividend, fee, and transfer &mdash; captured, categorised, and reconciled automatically.</p>
+            <div class="flex items-center justify-between text-xs mb-1.5" style="font-family:'Courier New',Courier,monospace;">
+              <span class="text-kyw-text-muted">automation_rate</span>
+              <span class="text-kyw-success font-bold">94%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" style="width:94%;"></div>
+            </div>
+          </div>
+
+          <!-- Card 2: AI -->
+          <div class="card card-hover p-5 md:p-6" style="background:#1a1d29; border:1px solid #2d3142; border-radius:10px;">
+            <p class="mono-label mb-2">// ai</p>
+            <h3 class="text-base font-bold text-white mb-1.5">Natural Language Queries</h3>
+            <p class="text-xs text-kyw-text-secondary leading-relaxed mb-4">Ask your portfolio anything. Get structured, sourced answers in seconds.</p>
+            <div class="terminal-block">
+              <div class="text-kyw-text-muted">&gt; What's my USD exposure?</div>
+              <div class="text-kyw-success mt-1">USD: 42.3% ($1.84M across 6 entities)</div>
+              <div class="text-kyw-text-muted mt-1">&gt; <span class="cursor-blink">_</span></div>
+            </div>
+          </div>
+
+          <!-- Card 3: Entities -->
+          <div class="card card-hover p-5 md:p-6" style="background:#1a1d29; border:1px solid #2d3142; border-radius:10px;">
+            <p class="mono-label mb-2">// entities</p>
+            <h3 class="text-base font-bold text-white mb-1.5">Multi-Entity Architecture</h3>
+            <p class="text-xs text-kyw-text-secondary leading-relaxed mb-4">Map your real structure: trusts, SPVs, holdcos, and personal accounts &mdash; all in one graph.</p>
+            <div class="terminal-block text-xs leading-loose">
+              <span class="text-kyw-text">Owner</span><br />
+              <span class="text-kyw-text-muted">&nbsp;&nbsp;&#9500;&#9472; </span><span class="text-kyw-blue">Family Trust</span><br />
+              <span class="text-kyw-text-muted">&nbsp;&nbsp;&#9474;&nbsp;&nbsp;&#9492;&#9472; </span><span class="text-kyw-text-secondary">Holdings Ltd</span><br />
+              <span class="text-kyw-text-muted">&nbsp;&nbsp;&#9500;&#9472; </span><span class="text-kyw-blue">SPV Alpha</span><br />
+              <span class="text-kyw-text-muted">&nbsp;&nbsp;&#9492;&#9472; </span><span class="text-kyw-blue">Personal</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Integrations -->
+          <div class="card card-hover p-5 md:p-6" style="background:#1a1d29; border:1px solid #2d3142; border-radius:10px;">
+            <p class="mono-label mb-2">// integrations</p>
+            <h3 class="text-base font-bold text-white mb-1.5">10,000+ Bank Feeds</h3>
+            <p class="text-xs text-kyw-text-secondary leading-relaxed mb-4">Real-time connections to every major custodian and bank worldwide.</p>
+            <div class="flex flex-col gap-0.5">
+              <div class="status-row">
+                <span class="status-dot bg-kyw-success"></span>
+                <span class="text-kyw-text-secondary flex-1">HSBC Private</span>
+                <span class="text-kyw-success text-xs">Connected</span>
+              </div>
+              <div class="status-row">
+                <span class="status-dot bg-kyw-success"></span>
+                <span class="text-kyw-text-secondary flex-1">UBS Wealth</span>
+                <span class="text-kyw-success text-xs">Connected</span>
+              </div>
+              <div class="status-row">
+                <span class="status-dot dot-pulse" style="background:#febc2e;"></span>
+                <span class="text-kyw-text-secondary flex-1">Barclays</span>
+                <span class="text-xs" style="color:#febc2e;">Syncing...</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: Documents -->
+          <div class="card card-hover p-5 md:p-6" style="background:#1a1d29; border:1px solid #2d3142; border-radius:10px;">
+            <p class="mono-label mb-2">// documents</p>
+            <h3 class="text-base font-bold text-white mb-1.5">AI Document Processing</h3>
+            <p class="text-xs text-kyw-text-secondary leading-relaxed mb-4">Drop a PDF. The system reads, parses, and books the entries for you.</p>
+            <div class="terminal-block text-xs">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-kyw-text">Capital_Call_Q4.pdf</span>
+              </div>
+              <div class="flex items-center gap-2 text-kyw-text-muted">
+                <span>&nbsp;&nbsp;&#8594; Parsed</span>
+                <span class="text-kyw-border">&middot;</span>
+                <span>3 line items extracted</span>
+              </div>
+              <div class="flex items-center gap-2 text-kyw-success mt-0.5">
+                <span>&nbsp;&nbsp;&#8594; 3 journal entries created</span>
+                <span style="font-size:10px;">&#10003;</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6: Privacy -->
+          <div class="card card-hover p-5 md:p-6" style="background:#1a1d29; border:1px solid #2d3142; border-radius:10px;">
+            <p class="mono-label mb-2">// privacy</p>
+            <h3 class="text-base font-bold text-white mb-1.5">Zero-Knowledge Audit</h3>
+            <p class="text-xs text-kyw-text-secondary leading-relaxed mb-4">Every access logged. Every action traceable. Full compliance, zero exposure.</p>
+            <div class="terminal-block text-xs">
+              <div class="flex items-center justify-between text-kyw-text-muted mb-1">
+                <span>2026-02-09 09:41:12</span>
+                <span class="text-kyw-text-secondary">user.login</span>
+              </div>
+              <div class="flex items-center justify-between text-kyw-text-muted mb-1">
+                <span>2026-02-09 09:41:38</span>
+                <span class="text-kyw-text-secondary">portfolio.read</span>
+              </div>
+              <div class="flex items-center justify-between text-kyw-text-muted">
+                <span>2026-02-09 09:42:05</span>
+                <span class="text-kyw-text-secondary">report.export</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         HOW IT WORKS — 3-Step Pipeline
+         ======================================== -->
+    <section class="section-sm bg-kyw-bg">
+      <div class="page-container">
+
+        <p class="mono-label mb-2">// workflow</p>
+        <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight mb-8 md:mb-10">How it works</h2>
+
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-center gap-6 md:gap-4 lg:gap-6 max-w-3xl mx-auto">
+
+          <!-- Step 1 -->
+          <div class="flex-1 text-center">
+            <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-kyw-primary flex items-center justify-center" style="font-family:'Courier New',Courier,monospace; font-size:16px; font-weight:700; color:#604de4;">1</div>
+            <h3 class="text-sm font-bold text-white mb-1">Connect</h3>
+            <p class="text-xs text-kyw-text-muted leading-relaxed">Link your banks, custodians, and accounts in minutes.</p>
+          </div>
+
+          <!-- Arrow -->
+          <div class="hidden md:flex items-center justify-center pipeline-arrow flex-shrink-0 mt-[-20px]">
+            &#8594;
+          </div>
+
+          <!-- Step 2 -->
+          <div class="flex-1 text-center">
+            <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-kyw-primary flex items-center justify-center" style="font-family:'Courier New',Courier,monospace; font-size:16px; font-weight:700; color:#604de4;">2</div>
+            <h3 class="text-sm font-bold text-white mb-1">Organise</h3>
+            <p class="text-xs text-kyw-text-muted leading-relaxed">Structure entities, tag assets, and let AI categorise the rest.</p>
+          </div>
+
+          <!-- Arrow -->
+          <div class="hidden md:flex items-center justify-center pipeline-arrow flex-shrink-0 mt-[-20px]">
+            &#8594;
+          </div>
+
+          <!-- Step 3 -->
+          <div class="flex-1 text-center">
+            <div class="w-12 h-12 mx-auto mb-3 rounded-full border-2 border-kyw-primary flex items-center justify-center" style="font-family:'Courier New',Courier,monospace; font-size:16px; font-weight:700; color:#604de4;">3</div>
+            <h3 class="text-sm font-bold text-white mb-1">Operate</h3>
+            <p class="text-xs text-kyw-text-muted leading-relaxed">Real-time dashboard, queries, reports, and total control.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         THE PROMISE — What we are / What we're not
+         ======================================== -->
+    <section class="section-sm bg-kyw-bg grid-bg">
+      <div class="page-container">
+        <div class="max-w-3xl mx-auto">
+
+          <p class="mono-label mb-2">// promise</p>
+          <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight mb-6 md:mb-8">The line we draw</h2>
+
+          <div class="flex flex-col md:flex-row gap-4 md:gap-3">
+
+            <!-- What we are -->
+            <div class="flex-1 rounded-xl p-5 md:p-6" style="background:#1a1d29; border:1px solid #2d3142;">
+              <h3 class="flex items-center gap-2 text-sm font-bold text-kyw-success mb-4" style="font-family:'Courier New',Courier,monospace;">
+                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+                What we are
+              </h3>
+              <ul class="space-y-2.5 text-sm text-kyw-text-secondary">
+                <li class="flex items-start gap-2">
+                  <span class="text-kyw-success mt-0.5 flex-shrink-0" style="font-family:'Courier New',Courier,monospace; font-size:11px;">+</span>
+                  An operating system for wealth
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-kyw-success mt-0.5 flex-shrink-0" style="font-family:'Courier New',Courier,monospace; font-size:11px;">+</span>
+                  A multi-asset portfolio tracker
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-kyw-success mt-0.5 flex-shrink-0" style="font-family:'Courier New',Courier,monospace; font-size:11px;">+</span>
+                  An automated bookkeeping engine
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="text-kyw-success mt-0.5 flex-shrink-0" style="font-family:'Courier New',Courier,monospace; font-size:11px;">+</span>
+                  Pure SaaS &mdash; flat fee, no surprises
+                </li>
+              </ul>
+            </div>
+
+            <!-- What we're not -->
+            <div class="flex-1 rounded-xl p-5 md:p-6" style="background:#1a1d29; border:1px solid #2d3142;">
+              <h3 class="flex items-center gap-2 text-sm font-bold mb-4" style="font-family:'Courier New',Courier,monospace; color:#ef4444;">
+                <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                What we're not
+              </h3>
+              <ul class="space-y-2.5 text-sm text-kyw-text-secondary">
+                <li class="flex items-start gap-2">
+                  <span class="mt-0.5 flex-shrink-0" style="font-family:'Courier New',Courier,monospace; font-size:11px; color:#ef4444;">-</span>
+                  A broker or trading platform
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="mt-0.5 flex-shrink-0" style="font-family:'Courier New',Courier,monospace; font-size:11px; color:#ef4444;">-</span>
+                  A financial advisor
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="mt-0.5 flex-shrink-0" style="font-family:'Courier New',Courier,monospace; font-size:11px; color:#ef4444;">-</span>
+                  Commission-based anything
+                </li>
+                <li class="flex items-start gap-2">
+                  <span class="mt-0.5 flex-shrink-0" style="font-family:'Courier New',Courier,monospace; font-size:11px; color:#ef4444;">-</span>
+                  Conflicted with your interests
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         SECOND SCREENSHOT — hero-4.png
+         ======================================== -->
+    <section class="section-sm bg-kyw-bg">
+      <div class="page-container">
+        <div class="max-w-5xl mx-auto">
+
+          <p class="mono-label mb-2 text-center">// analytics_view</p>
+          <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight mb-6 md:mb-8 text-center">Every dimension. One screen.</h2>
+
+          <div class="browser-frame frame-glow">
+            <div class="browser-titlebar">
+              <span class="browser-dot browser-dot--red"></span>
+              <span class="browser-dot browser-dot--yellow"></span>
+              <span class="browser-dot browser-dot--green"></span>
+              <span class="browser-url">app.knowyourworth.com/analytics</span>
+            </div>
+            <img
+              src="assets/images/hero-4.png"
+              alt="KYW Analytics — deep portfolio analytics and reporting interface"
+              class="w-full block"
+              style="display:block;"
+            />
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         FOUNDER — Brief
+         ======================================== -->
+    <section class="bg-kyw-bg border-t border-b border-kyw-border">
+      <div class="page-container py-10 md:py-14">
+        <div class="max-w-2xl mx-auto">
+
+          <p class="mono-label mb-4">// from the founder</p>
+
+          <blockquote class="text-base md:text-lg text-kyw-text-secondary leading-relaxed mb-5" style="border-left:2px solid #2d3142; padding-left:20px;">
+            I sold a consumer business to L'Or&eacute;al and needed a system to manage the proceeds.
+            Every tool I found was built for the advisor, not the principal.
+            So I built one.
+          </blockquote>
+
+          <div class="flex items-center gap-4">
+            <p class="text-3xl md:text-4xl text-kyw-text" style="font-family: 'Alex Brush', cursive;">Elliot</p>
+            <div class="h-6 w-px bg-kyw-border"></div>
+            <div>
+              <p class="text-sm font-semibold text-kyw-text">Elliot Isaacs</p>
+              <p class="text-xs text-kyw-text-muted" style="font-family:'Courier New',Courier,monospace;">Founder &amp; CEO</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         FINAL CTA
+         ======================================== -->
+    <section id="launch" class="section bg-kyw-bg grid-bg">
+      <div class="page-container">
+        <div class="max-w-xl mx-auto text-center">
+
+          <p class="mono-label mb-3">// get_started</p>
+          <h2 class="text-2xl md:text-3xl lg:text-4xl font-black text-white tracking-tight mb-3 md:mb-4">
+            Ready to take control?
+          </h2>
+          <p class="text-sm text-kyw-text-muted mb-6 md:mb-8" style="font-family:'Courier New',Courier,monospace;">
+            No credit card &middot; No onboarding calls &middot; Just the product
+          </p>
+
+          <a href="#" class="btn-primary inline-block text-center glow-btn text-base !py-3 !px-8">
+            Launch App
+          </a>
+
+          <div class="flex items-center justify-center gap-4 mt-6 text-xs text-kyw-text-muted" style="font-family:'Courier New',Courier,monospace;">
+            <span class="flex items-center gap-1.5">
+              <span class="status-dot bg-kyw-success" style="width:5px;height:5px;"></span>
+              Free to start
+            </span>
+            <span class="text-kyw-border">|</span>
+            <span class="flex items-center gap-1.5">
+              <span class="status-dot bg-kyw-success" style="width:5px;height:5px;"></span>
+              2-min setup
+            </span>
+            <span class="text-kyw-border">|</span>
+            <span class="flex items-center gap-1.5">
+              <span class="status-dot bg-kyw-success" style="width:5px;height:5px;"></span>
+              Cancel anytime
+            </span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ========================================
+       MINIMAL FOOTER
+       ======================================== -->
+  <footer class="border-t border-kyw-border bg-kyw-bg">
+    <div class="page-container py-6 md:py-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <!-- Left -->
+        <div class="flex items-center gap-3 text-xs text-kyw-text-muted" style="font-family:'Courier New',Courier,monospace;">
+          <span class="text-kyw-text font-bold">&gt; KYW</span>
+          <span class="text-kyw-border">|</span>
+          <span>&copy; 2026 Know Your Worth Ltd</span>
+        </div>
+        <!-- Right links -->
+        <div class="flex items-center gap-4 text-xs text-kyw-text-muted" style="font-family:'Courier New',Courier,monospace;">
+          <a href="big-idea.html" class="hover:text-kyw-text transition-colors">the_big_idea</a>
+          <a href="investors.html" class="hover:text-kyw-text transition-colors">investors</a>
+          <a href="#" class="hover:text-kyw-text transition-colors">privacy</a>
+          <a href="#" class="hover:text-kyw-text transition-colors">terms</a>
+        </div>
+      </div>
+      <div class="mt-4 pt-3 border-t border-kyw-border flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-kyw-text-muted" style="font-family:'Courier New',Courier,monospace;">
+        <div class="flex items-center gap-3">
+          <span>SOC_2_TYPE_II</span>
+          <span class="text-kyw-border">&middot;</span>
+          <span>GDPR</span>
+          <span class="text-kyw-border">&middot;</span>
+          <span>AES-256</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="status-dot bg-kyw-success dot-pulse" style="width:5px;height:5px;"></span>
+          <span>all_systems_operational</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
