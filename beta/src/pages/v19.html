@@ -39,10 +39,16 @@
     .persona-tip {
       position: relative;
       cursor: pointer;
+      display: inline;
     }
-    .persona-tip > span {
-      border-bottom: 1px dashed rgba(96,77,228,0.5);
+    .persona-tip > span:first-child {
+      border-bottom: 1px dashed rgba(96,77,228,0.4);
       padding-bottom: 1px;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.2s;
+    }
+    .persona-tip:hover > span:first-child {
+      color: rgba(255,255,255,0.85);
     }
     .persona-tip .tip-card {
       position: absolute;
@@ -277,86 +283,30 @@
             Built for you.
           </h2>
 
-          <!-- Persona badges with tooltips -->
-          <div class="flex flex-wrap gap-2 md:gap-2.5 mb-10 md:mb-14" style="justify-content: space-evenly;">
-            <div class="persona-tip">
-              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Private Equity Execs</span>
-              <div class="tip-card">
-                <p class="text-xs font-semibold text-white mb-1">Private Equity Executives</p>
-                <p class="text-xs text-kyw-text-muted leading-relaxed">Capital calls, distributions, and fund commitments tracked in real time across every vehicle.</p>
-              </div>
-            </div>
-            <div class="persona-tip">
-              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">C-Suite Professionals</span>
-              <div class="tip-card">
-                <p class="text-xs font-semibold text-white mb-1">C-Suite Professionals</p>
-                <p class="text-xs text-kyw-text-muted leading-relaxed">Investments spread across multiple brokers, pensions, and asset classes. One place to see it all.</p>
-              </div>
-            </div>
-            <div class="persona-tip">
-              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Exited Founders</span>
-              <div class="tip-card">
-                <p class="text-xs font-semibold text-white mb-1">Exited Founders</p>
-                <p class="text-xs text-kyw-text-muted leading-relaxed">Exit proceeds reinvested across angel deals, funds, property, and liquid assets &mdash; finally connected.</p>
-              </div>
-            </div>
-            <div class="persona-tip">
-              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Bankers</span>
-              <div class="tip-card">
-                <p class="text-xs font-semibold text-white mb-1">Bankers</p>
-                <p class="text-xs text-kyw-text-muted leading-relaxed">Portfolios across equities, property, and alternatives &mdash; too complex for spreadsheets, too small for a family office.</p>
-              </div>
-            </div>
-            <div class="persona-tip">
-              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">M&amp;A Advisors</span>
-              <div class="tip-card">
-                <p class="text-xs font-semibold text-white mb-1">M&amp;A Advisors</p>
-                <p class="text-xs text-kyw-text-muted leading-relaxed">Investments across multiple brokers and asset classes. Real-time visibility without the admin.</p>
-              </div>
-            </div>
-            <div class="persona-tip">
-              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Wealthy Families</span>
-              <div class="tip-card">
-                <p class="text-xs font-semibold text-white mb-1">Wealthy Families</p>
-                <p class="text-xs text-kyw-text-muted leading-relaxed">Multi-generational wealth across trusts, entities, and jurisdictions &mdash; everyone sees what they need to.</p>
-              </div>
-            </div>
-            <div class="persona-tip">
-              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Legal &amp; Tax Partners</span>
-              <div class="tip-card">
-                <p class="text-xs font-semibold text-white mb-1">Legal &amp; Tax Partners</p>
-                <p class="text-xs text-kyw-text-muted leading-relaxed">ISAs, pensions, property, direct investments &mdash; a growing portfolio that deserves a proper view.</p>
-              </div>
-            </div>
-            <div class="persona-tip">
-              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Entrepreneurs</span>
-              <div class="tip-card">
-                <p class="text-xs font-semibold text-white mb-1">Successful Entrepreneurs</p>
-                <p class="text-xs text-kyw-text-muted leading-relaxed">Reinvested capital scattered across platforms, providers, and asset classes. One dashboard to rule them all.</p>
-              </div>
-            </div>
-            <div class="persona-tip">
-              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Self-Directed Investors</span>
-              <div class="tip-card">
-                <p class="text-xs font-semibold text-white mb-1">Self-Directed Investors</p>
-                <p class="text-xs text-kyw-text-muted leading-relaxed">Multiple brokers, asset classes, and currencies. Full control without full-time admin.</p>
-              </div>
-            </div>
-            <div class="persona-tip">
-              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Fund Managers</span>
-              <div class="tip-card">
-                <p class="text-xs font-semibold text-white mb-1">Fund Managers</p>
-                <p class="text-xs text-kyw-text-muted leading-relaxed">Personal wealth alongside fund interests. See everything in one place, in real time.</p>
-              </div>
-            </div>
-            <div class="persona-tip">
-              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Financial Professionals</span>
-              <div class="tip-card">
-                <p class="text-xs font-semibold text-white mb-1">Financial Professionals</p>
-                <p class="text-xs text-kyw-text-muted leading-relaxed">You manage other people&rsquo;s money all day. Now manage your own with the same rigour.</p>
-              </div>
-            </div>
-          </div>
+          <!-- Persona list with tooltips -->
+          <p class="text-xs md:text-sm tracking-widest uppercase leading-loose mb-10 md:mb-14" style="color: rgba(255,255,255,0.45);">
+            <span class="persona-tip"><span>PE EXECS</span><span class="tip-card"><span class="text-xs font-semibold text-white block mb-1">Private Equity Executives</span><span class="text-xs text-kyw-text-muted leading-relaxed block">Capital calls, distributions, and fund commitments tracked in real time across every vehicle.</span></span></span>
+            <span style="color: rgba(96,77,228,0.4);"> | </span>
+            <span class="persona-tip"><span>C-SUITE</span><span class="tip-card"><span class="text-xs font-semibold text-white block mb-1">C-Suite Professionals</span><span class="text-xs text-kyw-text-muted leading-relaxed block">Investments spread across multiple brokers, pensions, and asset classes. One place to see it all.</span></span></span>
+            <span style="color: rgba(96,77,228,0.4);"> | </span>
+            <span class="persona-tip"><span>EXITED FOUNDERS</span><span class="tip-card"><span class="text-xs font-semibold text-white block mb-1">Exited Founders</span><span class="text-xs text-kyw-text-muted leading-relaxed block">Exit proceeds reinvested across angel deals, funds, property, and liquid assets &mdash; finally connected.</span></span></span>
+            <span style="color: rgba(96,77,228,0.4);"> | </span>
+            <span class="persona-tip"><span>BANKERS</span><span class="tip-card"><span class="text-xs font-semibold text-white block mb-1">Bankers</span><span class="text-xs text-kyw-text-muted leading-relaxed block">Portfolios across equities, property, and alternatives &mdash; too complex for spreadsheets, too small for a family office.</span></span></span>
+            <span style="color: rgba(96,77,228,0.4);"> | </span>
+            <span class="persona-tip"><span>M&amp;A ADVISORS</span><span class="tip-card"><span class="text-xs font-semibold text-white block mb-1">M&amp;A Advisors</span><span class="text-xs text-kyw-text-muted leading-relaxed block">Investments across multiple brokers and asset classes. Real-time visibility without the admin.</span></span></span>
+            <span style="color: rgba(96,77,228,0.4);"> | </span>
+            <span class="persona-tip"><span>WEALTHY FAMILIES</span><span class="tip-card"><span class="text-xs font-semibold text-white block mb-1">Wealthy Families</span><span class="text-xs text-kyw-text-muted leading-relaxed block">Multi-generational wealth across trusts, entities, and jurisdictions &mdash; everyone sees what they need to.</span></span></span>
+            <span style="color: rgba(96,77,228,0.4);"> | </span>
+            <span class="persona-tip"><span>LEGAL &amp; TAX PARTNERS</span><span class="tip-card"><span class="text-xs font-semibold text-white block mb-1">Legal &amp; Tax Partners</span><span class="text-xs text-kyw-text-muted leading-relaxed block">ISAs, pensions, property, direct investments &mdash; a growing portfolio that deserves a proper view.</span></span></span>
+            <span style="color: rgba(96,77,228,0.4);"> | </span>
+            <span class="persona-tip"><span>ENTREPRENEURS</span><span class="tip-card"><span class="text-xs font-semibold text-white block mb-1">Successful Entrepreneurs</span><span class="text-xs text-kyw-text-muted leading-relaxed block">Reinvested capital scattered across platforms, providers, and asset classes. One dashboard to rule them all.</span></span></span>
+            <span style="color: rgba(96,77,228,0.4);"> | </span>
+            <span class="persona-tip"><span>SELF-DIRECTED INVESTORS</span><span class="tip-card"><span class="text-xs font-semibold text-white block mb-1">Self-Directed Investors</span><span class="text-xs text-kyw-text-muted leading-relaxed block">Multiple brokers, asset classes, and currencies. Full control without full-time admin.</span></span></span>
+            <span style="color: rgba(96,77,228,0.4);"> | </span>
+            <span class="persona-tip"><span>FUND MANAGERS</span><span class="tip-card"><span class="text-xs font-semibold text-white block mb-1">Fund Managers</span><span class="text-xs text-kyw-text-muted leading-relaxed block">Personal wealth alongside fund interests. See everything in one place, in real time.</span></span></span>
+            <span style="color: rgba(96,77,228,0.4);"> | </span>
+            <span class="persona-tip"><span>FINANCIAL PROFESSIONALS</span><span class="tip-card"><span class="text-xs font-semibold text-white block mb-1">Financial Professionals</span><span class="text-xs text-kyw-text-muted leading-relaxed block">You manage other people&rsquo;s money all day. Now manage your own with the same rigour.</span></span></span>
+          </p>
 
           <!-- Narrative — centred prose -->
           <div class="max-w-xl mx-auto space-y-5 mb-10 md:mb-14">
@@ -364,11 +314,7 @@
               You&rsquo;re way beyond budgeting apps. Spreadsheets don&rsquo;t cut it for multi-asset, multi-currency portfolios spanning banks, brokers and borders. And family office systems charge like a rhino!
             </p>
             <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed">
-              Why is there nothing built, and priced, for you?
-            </p>        
-            </p>
-            <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed">
-              That&rsquo;s what our founder thought. So he built it.</span>
+              Why is there nothing built for you? That&rsquo;s what our founder thought. So he built it.</span>
             </p>
           </div>
 
