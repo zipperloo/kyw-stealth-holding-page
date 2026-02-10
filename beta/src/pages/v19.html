@@ -35,6 +35,47 @@
         justify-content: space-around;
       }
     }
+    /* Tooltip badges */
+    .persona-tip {
+      position: relative;
+      cursor: pointer;
+    }
+    .persona-tip > span {
+      border-bottom: 1px dashed rgba(96,77,228,0.5);
+      padding-bottom: 1px;
+    }
+    .persona-tip .tip-card {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 260px;
+      padding: 14px 16px;
+      background: rgba(18, 20, 32, 0.98);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s;
+      z-index: 30;
+      pointer-events: none;
+      text-align: left;
+    }
+    .persona-tip .tip-card::before {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-bottom-color: rgba(255,255,255,0.08);
+    }
+    .persona-tip:hover .tip-card,
+    .persona-tip.active .tip-card {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
     .glow-btn:hover {
       box-shadow:
         0 0 30px rgba(96, 77, 228, 0.45),
@@ -112,6 +153,19 @@
         iconClose.classList.add('hidden');
       });
     });
+
+    // Persona tooltips — tap to open on mobile, tap elsewhere to close
+    document.querySelectorAll('.persona-tip').forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var wasActive = this.classList.contains('active');
+        document.querySelectorAll('.persona-tip.active').forEach(function(t) { t.classList.remove('active'); });
+        if (!wasActive) this.classList.add('active');
+      });
+    });
+    document.addEventListener('click', function() {
+      document.querySelectorAll('.persona-tip.active').forEach(function(t) { t.classList.remove('active'); });
+    });
   </script>
 
   <main>
@@ -136,7 +190,7 @@
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-kyw-primary to-kyw-blue">Zero drama.</span>
               </h1>
               <p class="text-base md:text-lg lg:text-xl text-kyw-text-secondary leading-relaxed mb-6 md:mb-8 max-w-lg mx-auto md:mx-0">
-                Investments, property, private deals, cash &mdash; finally see your complete financial picture. Sign up like Netflix. No spreadsheets required.
+                Family office functionality for mere mortals. Your entire wealth universe in one platform. See your complete financial picture. New functionality each week. Simple sign-up, start today.
               </p>
               <div class="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
                 <a href="#get-started" class="bg-gradient-to-r from-kyw-primary to-kyw-blue text-white px-8 py-4 rounded-full text-base font-bold hover:shadow-xl hover:shadow-kyw-primary/30 transition-all duration-200 text-center min-h-[48px] flex items-center justify-center">
@@ -205,11 +259,134 @@
             <svg class="w-5 h-5 md:w-6 md:h-6 text-kyw-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
             </svg>
-            <span class="text-kyw-text text-sm md:text-base font-semibold whitespace-nowrap">Native AI</span>
+            <span class="text-kyw-text text-sm md:text-base font-semibold whitespace-nowrap">AI Chat</span>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- ============================================================
+         INTRO NARRATIVE — "Who is KYW for?"
+         ============================================================ -->
+    <section class="relative overflow-hidden" style="background: radial-gradient(ellipse at 50% 0%, rgba(96,77,228,0.08) 0%, transparent 50%), #0d0e13;">
+      <div class="page-container py-20 md:py-28 lg:py-32">
+        <div class="max-w-3xl mx-auto text-center">
+
+          <!-- Title -->
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight mb-6 md:mb-8">
+            Built for you.
+          </h2>
+
+          <!-- Persona badges with tooltips -->
+          <div class="flex flex-wrap gap-2 md:gap-2.5 mb-10 md:mb-14" style="justify-content: space-evenly;">
+            <div class="persona-tip">
+              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Private Equity Execs</span>
+              <div class="tip-card">
+                <p class="text-xs font-semibold text-white mb-1">Private Equity Executives</p>
+                <p class="text-xs text-kyw-text-muted leading-relaxed">Capital calls, distributions, and fund commitments tracked in real time across every vehicle.</p>
+              </div>
+            </div>
+            <div class="persona-tip">
+              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">C-Suite Professionals</span>
+              <div class="tip-card">
+                <p class="text-xs font-semibold text-white mb-1">C-Suite Professionals</p>
+                <p class="text-xs text-kyw-text-muted leading-relaxed">Investments spread across multiple brokers, pensions, and asset classes. One place to see it all.</p>
+              </div>
+            </div>
+            <div class="persona-tip">
+              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Exited Founders</span>
+              <div class="tip-card">
+                <p class="text-xs font-semibold text-white mb-1">Exited Founders</p>
+                <p class="text-xs text-kyw-text-muted leading-relaxed">Exit proceeds reinvested across angel deals, funds, property, and liquid assets &mdash; finally connected.</p>
+              </div>
+            </div>
+            <div class="persona-tip">
+              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Bankers</span>
+              <div class="tip-card">
+                <p class="text-xs font-semibold text-white mb-1">Bankers</p>
+                <p class="text-xs text-kyw-text-muted leading-relaxed">Portfolios across equities, property, and alternatives &mdash; too complex for spreadsheets, too small for a family office.</p>
+              </div>
+            </div>
+            <div class="persona-tip">
+              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">M&amp;A Advisors</span>
+              <div class="tip-card">
+                <p class="text-xs font-semibold text-white mb-1">M&amp;A Advisors</p>
+                <p class="text-xs text-kyw-text-muted leading-relaxed">Investments across multiple brokers and asset classes. Real-time visibility without the admin.</p>
+              </div>
+            </div>
+            <div class="persona-tip">
+              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Sweet Equity Management</span>
+              <div class="tip-card">
+                <p class="text-xs font-semibold text-white mb-1">Sweet Equity Management</p>
+                <p class="text-xs text-kyw-text-muted leading-relaxed">You're about to crystalise your hard work and loyalty - next the hard bit... growing, tracking and keeping it!</p>
+              </div>
+            </div>
+            <div class="persona-tip">
+              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Wealthy Families</span>
+              <div class="tip-card">
+                <p class="text-xs font-semibold text-white mb-1">Wealthy Families</p>
+                <p class="text-xs text-kyw-text-muted leading-relaxed">Multi-generational wealth across trusts, entities, and jurisdictions &mdash; everyone sees what they need to.</p>
+              </div>
+            </div>
+            <div class="persona-tip">
+              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Legal &amp; Tax Partners</span>
+              <div class="tip-card">
+                <p class="text-xs font-semibold text-white mb-1">Legal &amp; Tax Partners</p>
+                <p class="text-xs text-kyw-text-muted leading-relaxed">ISAs, pensions, property, direct investments &mdash; a growing portfolio that deserves a proper view.</p>
+              </div>
+            </div>
+            <div class="persona-tip">
+              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Successful Entrepreneurs</span>
+              <div class="tip-card">
+                <p class="text-xs font-semibold text-white mb-1">Successful Entrepreneurs</p>
+                <p class="text-xs text-kyw-text-muted leading-relaxed">Reinvested capital scattered across platforms, providers, and asset classes. One dashboard to rule them all.</p>
+              </div>
+            </div>
+            <div class="persona-tip">
+              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Self-Directed Investors</span>
+              <div class="tip-card">
+                <p class="text-xs font-semibold text-white mb-1">Self-Directed Investors</p>
+                <p class="text-xs text-kyw-text-muted leading-relaxed">Multiple brokers, asset classes, and currencies. Full control without full-time admin.</p>
+              </div>
+            </div>
+            <div class="persona-tip">
+              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Fund Managers</span>
+              <div class="tip-card">
+                <p class="text-xs font-semibold text-white mb-1">Fund Managers</p>
+                <p class="text-xs text-kyw-text-muted leading-relaxed">Personal wealth alongside fund interests. See everything in one place, in real time.</p>
+              </div>
+            </div>
+            <div class="persona-tip">
+              <span class="bg-white/[0.06] text-kyw-text-secondary text-xs font-medium px-3 py-1.5 rounded-full inline-block">Financial Professionals</span>
+              <div class="tip-card">
+                <p class="text-xs font-semibold text-white mb-1">Financial Professionals</p>
+                <p class="text-xs text-kyw-text-muted leading-relaxed">You manage other people&rsquo;s money all day. Now manage your own with the same rigour.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Narrative — centred prose -->
+          <div class="max-w-xl mx-auto space-y-5 mb-10 md:mb-14">
+            <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed">
+              You&rsquo;re way beyond budgeting apps. Spreadsheets don&rsquo;t cut it for multi-asset, multi-currency portfolios spanning banks, brokers and borders. And family office systems charge like a rhino!
+            </p>
+            <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed">
+              Why is there nothing built, and priced, for you?
+            </p>        
+            </p>
+            <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed">
+              That&rsquo;s what our founder thought. So he built it.</span>
+            </p>
+          </div>
+
+          <!-- Punchline -->
+          <p class="text-2xl md:text-4xl font-black tracking-tight">
+            <span class="text-white">The family office. </span><span class="text-kyw-primary">Democratised.</span>
+          </p>
+
+        </div>
+      </div>
+    </section>
 
     <!-- ============================================================
          FEATURE 1 — "See everything in one place"
@@ -229,7 +406,7 @@
               See everything.<br/>In one place.
             </h2>
             <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed mb-6">
-              Cash, property, equities, angel deals, crypto, that wine collection &mdash; all of it. Connected to over 10,000 banks worldwide. No more juggling twelve logins and three spreadsheets.
+              Cash, bonds, equities, PE commitments, structured notes, hedge fund holdings, angel deals, that wine collection &mdash; all of it - and more to come. See it all by entity and by portfolio.
             </p>
             <div class="space-y-3 mb-6">
               <div class="flex items-center gap-3">
@@ -238,7 +415,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
                   </svg>
                 </div>
-                <span class="text-kyw-text text-sm md:text-base">Auto-sync from every bank and broker</span>
+                <span class="text-kyw-text text-sm md:text-base">Auto-sync from major banks and brokers</span>
               </div>
               <div class="flex items-center gap-3">
                 <div class="w-8 h-8 bg-kyw-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
@@ -451,7 +628,7 @@
         <div class="page-container">
           <p class="text-white text-2xl md:text-3xl lg:text-4xl font-bold max-w-lg leading-tight">
             Track your performance.<br/>
-            <span class="text-kyw-text-secondary text-lg md:text-xl lg:text-2xl font-normal">Across every asset class, in real time.</span>
+            <span class="text-kyw-text-secondary text-lg md:text-xl lg:text-2xl font-normal">Don't wait for a quarterly meeting.</span>
           </p>
         </div>
       </div>
@@ -558,7 +735,7 @@
               Anywhere.<br/>Any device.
             </h2>
             <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed mb-6">
-              Your wealth doesn't sleep, and neither does KYW. Access your full financial picture from your phone at dinner, your laptop in the office, or your tablet on the plane. Same data, same power, every screen.
+              Your wealth doesn't sleep, and neither does KYW. Access your full financial picture from any device. Breaking geo-political news rattles the market, what's your exposure, what's your move.
             </p>
             <div class="space-y-3 mb-6">
               <div class="flex items-center gap-3">
@@ -633,7 +810,7 @@
               <span class="inline-flex items-center bg-kyw-blue/10 text-kyw-blue text-xs font-semibold px-3 py-1 rounded-full">Advisor Access</span>
             </div>
             <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 md:mb-5 tracking-tight">
-              Your team.<br/>Connected.
+              Your advisors.<br/>Connected.
             </h2>
             <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed mb-6">
               Quarterly reports are stale before you open them. Spreadsheets can&rsquo;t keep up. KYW gives you always-on data you can drill into anytime &mdash; little and often, not once a quarter. Every advisor, lawyer and accountant all looking at the same data.
@@ -690,7 +867,7 @@
             No trading. No advice.<br/>Just clarity.
           </h2>
           <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed max-w-2xl mx-auto">
-            We know our lane. KYW will never trade your assets or give investment advice. Simple software fees &mdash; no commissions, no conflicts. Love your bank? Trust your advisors? Good. Keep them.
+            We know our lane. KYW isn&rsquo;t a broker or advisor &mdash; it&rsquo;s the back office they can&rsquo;t give you. A single view across every provider, every entity, every asset class. No commissions. No conflicts.
           </p>
         </div>
         <!-- Two-column comparison -->
@@ -716,7 +893,7 @@
               </li>
               <li class="flex items-start gap-2 text-kyw-text-secondary">
                 <span class="text-kyw-success mt-0.5 flex-shrink-0">&#10003;</span>
-                <span>Flat software fee, like Netflix</span>
+                <span>Fair monthly subscription fee</span>
               </li>
               <li class="flex items-start gap-2 text-kyw-text-secondary">
                 <span class="text-kyw-success mt-0.5 flex-shrink-0">&#10003;</span>
@@ -764,33 +941,18 @@
       <div class="page-container py-20 md:py-28 lg:py-32">
         <div class="max-w-3xl mx-auto text-center">
 
-          <!-- Title — the hook -->
-          <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-tight mb-8 md:mb-10">
-            You didn&rsquo;t get here<br/>by accident.
-          </h2>
-
-          <!-- The message — short, staccato, hard-hitting -->
-          <div class="max-w-xl mx-auto space-y-4 mb-10 md:mb-14">
-            <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed">
-              You built something. You took the risk. You made the calls. Now you have real wealth &mdash; and a dozen fragmented systems telling you what it might be worth.
-            </p>
-            <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed">
-              You deserve to see the whole picture. On your terms. In your time. Without asking permission.
+          <!-- Know Your... crescendo -->
+          <div class="space-y-2 md:space-y-3">
+            <p class="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight" style="color: rgba(255,255,255,0.2);">Know Your Plan.</p>
+            <p class="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight" style="color: rgba(255,255,255,0.4);">Know Your Holdings.</p>
+            <p class="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight" style="color: rgba(255,255,255,0.6);">Know Your Exposure.</p>
+            <p class="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight" style="color: rgba(255,255,255,0.8);">Know Your Performance.</p>
+            <p class="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight mt-4 md:mt-6">
+              <span class="text-white">Know Your </span><span class="text-kyw-primary">Worth.</span>
             </p>
           </div>
 
-          <!-- The brand close — massive -->
-          <p class="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight">
-            <span class="text-white">Know Your </span><span class="text-kyw-primary">Worth.</span>
-          </p>
-
-          <!-- Founder — small, beneath -->
-          <div class="mt-10 md:mt-14 flex items-center justify-center gap-3">
-            <p class="text-4xl text-kyw-text-secondary" style="font-family: 'Alex Brush', cursive;">Elliot</p>
-            <span class="text-kyw-border">|</span>
-            <p class="text-kyw-text-muted text-sm">Founder &amp; first user</p>
           </div>
-
         </div>
       </div>
     </section>
@@ -801,6 +963,70 @@
     <section class="section">
       <div class="page-container">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
+          <!-- Product-style audit log interface -->
+          <div class="relative">
+            <div class="absolute -inset-4 bg-gradient-to-br from-emerald-500/10 to-kyw-primary/5 rounded-3xl blur-2xl"></div>
+            <div class="relative bg-kyw-bg border border-kyw-border rounded-2xl overflow-hidden shadow-2xl">
+              <!-- App header bar -->
+              <div class="flex items-center justify-between px-4 py-3 border-b border-kyw-border">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                  </svg>
+                  <span class="text-white text-xs font-semibold">Audit Log</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-emerald-400 text-[10px] font-medium flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span>
+                    All systems secure
+                  </span>
+                </div>
+              </div>
+              <!-- Log entries -->
+              <div class="divide-y divide-kyw-border">
+                <div class="px-4 py-3 flex items-center justify-between">
+                  <div>
+                    <p class="text-white text-xs font-medium">You (Owner)</p>
+                    <p class="text-kyw-text-muted text-[10px]">Viewed portfolio dashboard</p>
+                  </div>
+                  <span class="text-emerald-400 text-[10px] font-medium">2 min ago</span>
+                </div>
+                <div class="px-4 py-3 flex items-center justify-between">
+                  <div>
+                    <p class="text-white text-xs font-medium">Support-John.M</p>
+                    <p class="text-kyw-text-muted text-[10px]">Accessed account settings</p>
+                  </div>
+                  <span class="text-kyw-text-muted text-[10px]">15 min ago</span>
+                </div>
+                <div class="px-4 py-3 flex items-center justify-between">
+                  <div>
+                    <p class="text-white text-xs font-medium">Advisor-Sarah.K</p>
+                    <p class="text-kyw-text-muted text-[10px]">Viewed holdings report</p>
+                  </div>
+                  <span class="text-kyw-text-muted text-[10px]">2 hours ago</span>
+                </div>
+                <div class="px-4 py-3 flex items-center justify-between">
+                  <div>
+                    <p class="text-white text-xs font-medium">You (Owner)</p>
+                    <p class="text-kyw-text-muted text-[10px]">Updated bank connection</p>
+                  </div>
+                  <span class="text-kyw-text-muted text-[10px]">5 hours ago</span>
+                </div>
+                <div class="px-4 py-3 flex items-center justify-between">
+                  <div>
+                    <p class="text-white text-xs font-medium">Accountant-David.R</p>
+                    <p class="text-kyw-text-muted text-[10px]">Exported tax summary</p>
+                  </div>
+                  <span class="text-kyw-text-muted text-[10px]">Yesterday</span>
+                </div>
+              </div>
+              <!-- Footer -->
+              <div class="px-4 py-2.5 border-t border-kyw-border flex items-center justify-between">
+                <span class="text-kyw-text-muted text-[10px]">Showing 5 of 142 entries</span>
+                <span class="text-kyw-primary text-[10px] font-medium">View all &rarr;</span>
+              </div>
+            </div>
+          </div>
           <!-- Text -->
           <div>
             <div class="flex flex-wrap gap-2 mb-5">
@@ -811,7 +1037,7 @@
               Your data belongs<br/>to you. Period.
             </h2>
             <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed mb-6">
-              AES-256 encryption. Zero-access architecture. Full audit trails on every action. Built by someone who needed to trust it with his own wealth first.
+              AES-256 encryption in transit and at rest. Role-based access controls. Full audit trails on every action. Built by someone who needed to trust it with his own wealth first.
             </p>
             <div class="space-y-3">
               <div class="flex items-center gap-3">
@@ -820,7 +1046,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
                   </svg>
                 </div>
-                <span class="text-kyw-text text-sm md:text-base">End-to-end encryption at rest and in transit</span>
+                <span class="text-kyw-text text-sm md:text-base">Encrypted in transit and at rest</span>
               </div>
               <div class="flex items-center gap-3">
                 <div class="w-8 h-8 bg-emerald-500/10 rounded-full flex items-center justify-center flex-shrink-0">
@@ -840,23 +1066,6 @@
               </div>
             </div>
           </div>
-          <!-- Shield graphic -->
-          <div class="relative flex items-center justify-center">
-            <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-kyw-primary/5 rounded-3xl blur-3xl"></div>
-            <div class="relative w-48 h-48 md:w-64 md:h-64">
-              <svg viewBox="0 0 200 200" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="shieldGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stop-color="#34d399" stop-opacity="0.2"/>
-                    <stop offset="100%" stop-color="#6d28d9" stop-opacity="0.05"/>
-                  </linearGradient>
-                </defs>
-                <path d="M100 15 L175 50 L175 110 C175 150 140 180 100 195 C60 180 25 150 25 110 L25 50 Z" fill="url(#shieldGrad)" stroke="rgba(52,211,153,0.3)" stroke-width="1.5"/>
-                <path d="M100 35 L155 60 L155 108 C155 140 130 162 100 175 C70 162 45 140 45 108 L45 60 Z" fill="none" stroke="rgba(52,211,153,0.15)" stroke-width="1"/>
-                <path d="M78 100 L92 114 L122 84" fill="none" stroke="#34d399" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -866,31 +1075,40 @@
          ============================================================ -->
     <section class="section bg-kyw-surface/30">
       <div class="page-container">
-        <div class="text-center mb-8 md:mb-10">
-          <h2 class="text-3xl md:text-4xl font-bold text-white tracking-tight">Built for real wealth.</h2>
-          <p class="text-kyw-text-secondary text-base md:text-lg mt-2">Not a portfolio tracker with a pretty pie chart.</p>
-        </div>
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-          <div class="bg-kyw-bg/60 backdrop-blur-sm rounded-xl p-5 md:p-6 border border-kyw-border text-center">
-            <div class="text-3xl md:text-4xl font-black text-kyw-primary mb-1">10K+</div>
-            <p class="text-white text-sm font-semibold mb-1">Bank Connections</p>
-            <p class="text-kyw-text-muted text-xs">Auto-sync globally</p>
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight mb-4 md:mb-5">
+            The roadmap is yours.
+          </h2>
+          <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed mb-8 md:mb-10 max-w-2xl mx-auto">
+            We&rsquo;re launching with a solid core and comprehensive features across every major asset class. But the best workflows come from those who use them.
+          </p>
+          <!-- Feature discussion threads -->
+          <div class="max-w-lg mx-auto mb-8 md:mb-10 text-left">
+            <div class="border-l-2 border-kyw-primary/30 pl-4 space-y-4">
+              <div>
+                <p class="text-white text-sm font-medium">&ldquo;What&rsquo;s missing from capital call tracking?&rdquo;</p>
+                <p class="text-kyw-text-muted text-xs mt-0.5">12 replies &middot; PE workflow</p>
+              </div>
+              <div>
+                <p class="text-white text-sm font-medium">&ldquo;Do we need sweet equity vesting tracking?&rdquo;</p>
+                <p class="text-kyw-text-muted text-xs mt-0.5">8 replies &middot; Equity &amp; options</p>
+              </div>
+              <div>
+                <p class="text-white text-sm font-medium">&ldquo;How should we handle art and collectibles?&rdquo;</p>
+                <p class="text-kyw-text-muted text-xs mt-0.5">6 replies &middot; Alternative assets</p>
+              </div>
+              <div>
+                <p class="text-white text-sm font-medium">&ldquo;Will features? Any STEP estate lawyers out there?&rdquo;</p>
+                <p class="text-kyw-text-muted text-xs mt-0.5">19 replies &middot; Wills &amp; trusts</p>
+              </div>
+            </div>
           </div>
-          <div class="bg-kyw-bg/60 backdrop-blur-sm rounded-xl p-5 md:p-6 border border-kyw-border text-center">
-            <div class="text-3xl md:text-4xl font-black text-kyw-primary mb-1">180+</div>
-            <p class="text-white text-sm font-semibold mb-1">Currencies</p>
-            <p class="text-kyw-text-muted text-xs">Live FX rates</p>
-          </div>
-          <div class="bg-kyw-bg/60 backdrop-blur-sm rounded-xl p-5 md:p-6 border border-kyw-border text-center">
-            <div class="text-3xl md:text-4xl font-black text-kyw-primary mb-1">99.9%</div>
-            <p class="text-white text-sm font-semibold mb-1">Uptime SLA</p>
-            <p class="text-kyw-text-muted text-xs">Always available</p>
-          </div>
-          <div class="bg-kyw-bg/60 backdrop-blur-sm rounded-xl p-5 md:p-6 border border-kyw-border text-center">
-            <div class="text-3xl md:text-4xl font-black text-kyw-primary mb-1">256-bit</div>
-            <p class="text-white text-sm font-semibold mb-1">Encryption</p>
-            <p class="text-kyw-text-muted text-xs">Bank-grade security</p>
-          </div>
+          <p class="text-base md:text-lg text-kyw-text-secondary leading-relaxed max-w-2xl mx-auto text-center mb-8 md:mb-10">
+            Our users are the smartest people in the room. Let&rsquo;s build this together.
+          </p>
+          <p class="text-2xl md:text-3xl lg:text-4xl font-bold text-white tracking-tight leading-tight">
+            Better software starts with better users.
+          </p>
         </div>
       </div>
     </section>
